@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <title>Search Inventory - Medicine Management System</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Form</title>
+    <!--CSS style sheet for inventory search page-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='inventory.css') }}">
 </head>
 
-<!--TEMPORARY PAGE-->
 
 <body>
-    <!--Add a temporary welcome message-->
-    <h1 style="color:rgb(160, 227, 146)">Welcome to the system!</h1>
+    <!--Main Header-->
+    <header style="background-color: #79D0E0;">
+        <!--Back Button-->
+        <button onclick="window.location.href='/';">
+            <i class="arrow left"></i>
+        </button>
+        <!--Title-->
+        <h1>Drug Inventory</h1>
+    </header>
 
-    <h2>Enter something:</h2>
-    <form method="POST">
-        <input type="text" name="user_input" required>
-        <button type="submit">Submit</button>
-    </form>
-    {% if user_input %}
-        <h2>You entered: {{ user_input }}</h2>
-    {% endif %}
+    <!--Search Bar Header -->
+    <header style="background-color: #F0F7F9;">
+        <!--Drug Name Search Field-->
+        <form method="POST">
+            <input type="text" name="drug_name" placeholder="Drug Name..." required>
+        </form>
+        <!--DIN Search Field-->
+        <form method="POST">
+            <input type="text" name="drug_DIN" placeholder="DIN..." required>
+        </form>
+    </header>
+
+    <!--Main Body-->
+    <main>
+        <p>Text</p>
+    </main>
+
 </body>
 </html>

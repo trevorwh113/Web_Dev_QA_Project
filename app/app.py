@@ -18,9 +18,9 @@ def prescription():
 # Inventory View Page----------------------------------------------
 @app.route('/inventory', methods=['GET', 'POST'])
 def inventory():
-    if request.method == 'POST':
-        user_input = request.form['user_input']
-        return render_template('inventory.html', user_input=user_input)
+    # if request.method == 'POST':
+    #     user_input = request.form['user_input']
+    #     return render_template('inventory.html', user_input=user_input)
     return render_template('inventory.html', user_input=None)
 
 # Supply Order View Page--------------------------------------------
