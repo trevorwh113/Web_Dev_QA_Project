@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Client Prescriptions - MMS </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Form</title>
+    <!--CSS style sheet for home page-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='prescription_lookup.css') }}">
 </head>
+
+
 
 <!--TEMPORARY PAGE-->
 
-<body style="font-family:'Courier New', Courier, monospace;
-             background-color:rgb(251, 241, 252);">
-    <!--Add a temporary welcome message-->
-    <h1 style="color:rgb(85, 210, 216)">Welcome to the system!</h1>
+<body>
 
-    <h2>Enter something:</h2>
-    <form method="POST">
-        <input type="text" name="user_input" required>
-        <button type="submit">Submit</button>
-    </form>
-    {% if user_input %}
-        <h2>You entered: {{ user_input }}</h2>
-    {% endif %}
+    <!--Create Header-->
+    <header>
+        <h1>Prescription Lookup</h1>
+    </header>
+
+   <!--Main Body-->
+   <main>
+        <!--Manage Prescription Orders Button-->
+        <button style="background-color: #EA8B96; color: #863E46;"
+            onclick="window.location.href='/prescription/client';">
+        client page
+        </button>
+    </main>
+
 </body>
 </html>

@@ -15,6 +15,22 @@ def prescription():
         return render_template('prescription.html', user_input=user_input)
     return render_template('prescription.html', user_input=None)
 
+# Client View Page--------------------------------------------
+@app.route('/prescription/client', methods=['GET', 'POST'])
+def client():
+    if request.method == 'POST':
+        user_input = request.form['user_input']
+        return render_template('client.html', user_input=user_input)
+    return render_template('client.html', user_input=None)
+
+# Prescription Creation View Page--------------------------------------------
+@app.route('/prescription/client/pre-creation', methods=['GET', 'POST'])
+def pre_creation():
+    if request.method == 'POST':
+        user_input = request.form['user_input']
+        return render_template('create_prescription.html', user_input=user_input)
+    return render_template('create_prescription.html', user_input=None)
+
 # Inventory View Page----------------------------------------------
 @app.route('/inventory', methods=['GET', 'POST'])
 def inventory():
