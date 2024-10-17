@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS style sheet for inventory search page-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='inventory.css') }}">
+    <!--Link JavaScript + Pass the Flask variable-->
+    <script>
+        data = {{ data | tojson }}
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='inventory.js') }}"></script>
 </head>
 
 
@@ -33,9 +38,18 @@
         </form>
     </header>
 
-    <!--Main Body-->
-    <main>
-        <p>Text</p>
+    <!--Section Subtitles-->
+    <header>
+        <div class="row">
+            <div class="col reg"><h3>Identification</h3></div>
+            <div class="col reg"><h3>Usage</h3></div>
+            <div class="col reg"><h3>Dosage</h3></div>
+            <div class="col reg"><h3>Quantity</h3></div>
+        </div>
+    </header>
+
+    <!--Section to Hold The Buttons-->
+    <main id="button-list">
     </main>
 
 </body>

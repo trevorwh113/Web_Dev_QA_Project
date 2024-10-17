@@ -18,10 +18,8 @@ def prescription():
 # Inventory View Page----------------------------------------------
 @app.route('/inventory', methods=['GET', 'POST'])
 def inventory():
-    # if request.method == 'POST':
-    #     user_input = request.form['user_input']
-    #     return render_template('inventory.html', user_input=user_input)
-    return render_template('inventory.html', user_input=None)
+    data = [["AA", "BD", "CD", "DE", 10], ["One", "Two", "Three", "Four", 230], ["AA", "BD", "CD", "DE", 10]]
+    return render_template('inventory.html', data=data)
 
 # Supply Order View Page--------------------------------------------
 @app.route('/supply', methods=['GET', 'POST'])
