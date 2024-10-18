@@ -6,28 +6,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS style sheet for home page-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='client_page.css') }}">
 </head>
 
 
 <body>
-TEMP PAGE RAHHH
-
-
     <!--Create Header-->
     <header>
-        <h1>Medicine Management System</h1>
+        <h1>client name variable</h1>
     </header>
 
    <!--Main Body-->
-   <main>
+   <toplayer style="display: flex; align-items: center;">
+        <div class="container">
+            <h1 style="font-size: 1.8rem;"> First Name: </h1> <p> John</p>
+            <h1 style="font-size: 1.8rem;"> First Name: </h1> <p> Smith</p>
+            <h1 style="font-size: 1.8rem;"> Phone Number: </h1> <p> (123)-456-7890</p>
+            <h1 style="font-size: 1.8rem;"> D.O.B.: </h1> <p> 28/09/2004</p>
+        </div>
+
         <!--Manage Prescription Orders Button-->
         <button style="background-color: #EA8B96; color: #863E46;"
             onclick="window.location.href='/prescription/client/pre-creation';">
             aniss this is for u <br>
             dont change anything on this page pls
         </button>
-    </main>
+    </toplayer>
+
+    <midlayer>
+        <div class="section">
+            <p style="font-size: 2rem;">Active Perscriptions</p> 
+            <div class="scrollBox">
+                meep morp
+            </div>
+        </div>
+        <div class="section">
+            <p style="font-size: 2rem;">History</p> 
+            <div class="scrollBox">
+                meep morp
+            </div>
+        </div>
+    </midlayer>
+    <footer>
+        
+    </footer>
 
 </body>
 </html>
