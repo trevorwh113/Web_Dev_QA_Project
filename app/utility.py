@@ -31,6 +31,27 @@ def get_all_inv():
 
     return inv_data
 
+def get_all_clients():
+    """
+    Returns a list of all the clients stored in the database. 
+    Return list has format:
+    [[full_name, birth_date, phone_number, active_prescriptions], ...]
+    [[str,       str,        str,          int],                  ...]
+    """
+    
+    # Mocks this functionality for now.
+    client_data = [
+        ["John Doe", "28/09/2004", "(123)-456-7890", 3], 
+        ["Jaine Fall", "8/02/2000", "(613)-999-7777", 10], 
+        ["Piper Mario", "17/04/1990", "(444)-656-6565", 1], 
+        ["Car Binky", "10/10/2020", "(444)-224-2345", 2], 
+        ["Helio Ptile", "8/02/2000", "(123)-767-5456", 4], 
+        ["Cotton Candy", "22/12/2012", "(232)-456-7890", 0], 
+        ["Last One", "14/12/3000", "(777)-666-55555", 13]
+    ]
+
+    return client_data
+
 def filter_inv(inv, par):
     """
     Filters a given inventory dataset to only include entires containing 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+</head>
+
+<!--TEMPORARY PAGE-->
+
+<body style="font-family:'Courier New', Courier, monospace;
+             background-color:rgb(251, 241, 252);">
+    <!--Add a temporary welcome message-->
+    <h1 style="color:rgb(85, 210, 216)">{{phone_number}}</h1>
+
+    <h2>Enter something:</h2>
+    <form method="POST">
+        <input type="text" name="user_input" required>
+        <button type="submit">Submit</button>
+    </form>
+    {% if user_input %}
+        <h2>You entered: {{ user_input }}</h2>
+    {% endif %}
+</body>
+</html>

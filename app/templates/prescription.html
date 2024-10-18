@@ -1,25 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <title>Manage Client Prescriptions - Medicine Management System</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Form</title>
+    <!--CSS style sheet for inventory search page-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='prescription.css') }}">
+    <!--Link JavaScript + Pass the Flask variables-->
+    <script>
+        data = {{ data | tojson }};
+        search = "clients";
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='search.js') }}"></script>
 </head>
 
-<!--TEMPORARY PAGE-->
 
-<body style="font-family:'Courier New', Courier, monospace;
-             background-color:rgb(251, 241, 252);">
-    <!--Add a temporary welcome message-->
-    <h1 style="color:rgb(85, 210, 216)">Welcome to the system!</h1>
+<body>
+    <!--Main Header-->
+    <header style="background-color: #EA8B96;">
+        <!--Back Button-->
+        <button onclick="window.location.href='/';">
+            <i class="arrow left"></i>
+        </button>
+        <!--Title-->
+        <h1>Client Lookup</h1>
+    </header>
 
-    <h2>Enter something:</h2>
-    <form method="POST">
-        <input type="text" name="user_input" required>
-        <button type="submit">Submit</button>
-    </form>
-    {% if user_input %}
-        <h2>You entered: {{ user_input }}</h2>
-    {% endif %}
+    <!--Search Bar Header -->
+    <header style="background-color: #FAF1F2;">
+        <!--Drug Name Search Field-->
+        <form method="POST">
+            <input type="text" name="search_par" placeholder="Name or Phone Number..." required>
+        </form>
+    </header>
+
+    <!--Section Subtitles-->
+    <header>
+        <div class="row">
+            <div class="col reg"><h3>Client Info</h3></div>
+            <div class="col reg"><h3></h3></div>
+            <div class="col reg"><h3>Prescription Info</h3></div>
+        </div>
+    </header>
+
+    <!--Section to Hold The Buttons-->
+    <main id="button-list">
+    </main>
+
 </body>
 </html>

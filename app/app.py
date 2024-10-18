@@ -13,13 +13,29 @@ app = Flask(__name__)
 def home():
     return render_template('home.html', user_input=None)
 
+
 # Prescription View Page--------------------------------------------
 @app.route('/prescription', methods=['GET', 'POST'])
 def prescription():
-    if request.method == 'POST':
-        user_input = request.form['user_input']
-        return render_template('prescription.html', user_input=user_input)
-    return render_template('prescription.html', user_input=None)
+    # Backend link to get the data.
+    data = utility.get_all_clients()
+
+    # Filter data set according to user's search parameters.
+    # if request.method == 'POST':
+    #     try:
+    #         par = request.form['search_par']
+    #     except:
+    #         par = None
+    #     data = utility.filter_inv(data, par)
+
+    # Renders the page.
+    return render_template('prescription.html', data=data)
+
+# Client Prescription Page---------------------------------------------
+@app.route('/prescription/<phone_number>', methods=['GET', 'POST'])
+def client_pres_page(phone_number):
+    return render_template('client_pres_page.html', phone_number=phone_number)
+
 
 # Inventory View Page----------------------------------------------
 @app.route('/inventory', methods=['GET', 'POST'])
@@ -42,6 +58,7 @@ def inventory():
 @app.route('/inventory/<din>', methods=['GET', 'POST'])
 def drug_info_page(din):
     return render_template('drug_info_page.html', din=din)
+
 
 # Supply Order View Page--------------------------------------------
 @app.route('/supply', methods=['GET', 'POST'])
