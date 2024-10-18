@@ -32,6 +32,12 @@ function show_items() {
         row = format_inventory_button(data[i])
         button.appendChild(row)
 
+        // Set the onclick event to bring you to the right page
+        button.id = data[i][1];
+        button.onclick = function() {
+            window.location.href="/inventory/"+this.id
+        }            
+        
         // Display the button on-screen
         document.getElementById("button-list").appendChild(button);
     }

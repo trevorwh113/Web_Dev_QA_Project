@@ -38,6 +38,11 @@ def inventory():
     # Renders the page.
     return render_template('inventory.html', data=data)
 
+# Drug Information Page---------------------------------------------
+@app.route('/inventory/<din>', methods=['GET', 'POST'])
+def drug_info_page(din):
+    return render_template('drug_info_page.html', din=din)
+
 # Supply Order View Page--------------------------------------------
 @app.route('/supply', methods=['GET', 'POST'])
 def supply():
