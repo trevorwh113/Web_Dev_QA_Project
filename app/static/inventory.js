@@ -23,12 +23,12 @@ function show_items() {
         button = document.createElement("button");
         button.style = BUTTON_STYLE;
         
-        // Create the line
+        // Create the decorative line
         line = document.createElement("i");
         line.className = "line";
         button.append(line);
 
-        // Create a paragraph inside the button
+        // Create the text elements inside the button
         row = format_inventory_button(data[i])
         button.appendChild(row)
 

@@ -1,4 +1,10 @@
+"""
+The main control flow of the app. Bridges between the backend link
+and the front end UI (html/css/js).
+"""
+
 from flask import Flask, render_template, request
+import utility
 
 app = Flask(__name__)
 
@@ -18,7 +24,22 @@ def prescription():
 # Inventory View Page----------------------------------------------
 @app.route('/inventory', methods=['GET', 'POST'])
 def inventory():
-    data = [["AA", "BD", "CD", "DE", 10], ["One", "Two", "Three", "Four", 230], ["AA", "BD", "CD", "DE", 10]]
+    # Backend link to get the data.
+    data = utility.get_all_inv()
+
+    # Filter data set according to user's search parameters.
+    if request.method == 'POST':
+        try:
+            drug_name = request.form['drug_name']
+        except:
+            drug_name = None
+        try:
+            din = request.form['drug_DIN']
+        except:
+            din = -1
+        data = utility.filter_inv(data, drug_name, din)
+
+    # Renders the page.
     return render_template('inventory.html', data=data)
 
 # Supply Order View Page--------------------------------------------
