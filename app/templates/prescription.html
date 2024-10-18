@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS style sheet for home page-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='prescription_lookup.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='prescription.css') }}">
 </head>
 
 
@@ -16,8 +16,11 @@
 
     <!--Create Header-->
     <header>
-        <h1>Prescription Lookup</h1>
-    </header>
+        <!--Back Button-->
+           <i class="arrow left" onclick="window.location.href='/';" ></i>
+
+       <h1 style="margin-bottom: 8px;">Client Lookup</h1>
+   </header>
 
    <!--Main Body-->
    <main>

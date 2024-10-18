@@ -56,32 +56,6 @@ p {
     text-align: center;
     align-items: center;
 }
-.pre_container {
-    margin: 0;
-    height: 4rem;
-    padding-left: 2rem;
-    background-color: #EA8B96;
-    display: flex;
-    align-items: center;
-}
-
-.section{
-    display: inline-block;
-
-    margin: 10px 40px 20px 50px ;
-}
-
-.scrollBox {
-    height: 63vh;
-    width: 42vw;
-    overflow: auto;
-    border-top: 5px solid #FF7F7F;
-    background-color: #e7dfe0;
-    display: block;
-    margin:5px 5px;
-    padding: 0px 20px 10px;
-    box-shadow:0 2px 15px 0 rgba(160, 108, 108, 0.2) inset;
-}
 
 button {
     border-radius: 20px;
@@ -96,13 +70,6 @@ button {
     padding: 10px;
 }
 
-.item {
-    border-left: 10px solid #FF7F7F;
-    background-color: #ffb6b6;
-    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    min-height: 74px;
-    margin: 20px 0px;
-}
 /* Arrow Element */
 .arrow {
     border: solid #863E46;
@@ -117,7 +84,7 @@ button {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
-
+/* Plus "+" symbol */
 span {
     content: "\002B";
     font-size: 80px;
