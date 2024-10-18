@@ -31,33 +31,30 @@ def get_all_inv():
 
     return inv_data
 
-def filter_inv(inv, drug_name, din):
+def filter_inv(inv, par):
     """
-    Filters a given inventory dataset to only include
-    entires containing the drug_name and/or din. Assumes
-    din and drug_name as int >= 0 and non-empty string,
-    respectively. Expected format for inv and return:
+    Filters a given inventory dataset to only include entires containing 
+    the drug_name or din. Assumes par is int >= 0 or non-empty string. 
+    Expected format for inv and return:
     [[drug_name, din, usage, dosage, quantity], ...]
     [[str,       int, str,   str,    int],      ...]
     """
     new_inv = []
+    drug_name = ""  # Default 'ignore' value
+    drug_din = -1   # Defualt 'ignore' value
 
-    # Validate search parameters
-    if valid_string(drug_name):
-        drug_name = str(drug_name)
-    else:
-        drug_name = ""
-    if valid_int(din):
-        din = int(din)
-    else:
-        din = -1
+    # Validate search parameter
+    if valid_int(par):
+        drug_din = int(par)
+    elif valid_string(par):
+        drug_name = str(par)
 
     for entry in inv:
         # Search by name.
-        if drug_name != "" and drug_name in entry[0]:
+        if drug_name != "" and drug_name.lower() in entry[0].lower():
             new_inv.append(entry)
         # Search by din.
-        elif din != -1 and din == entry[1]:
+        elif drug_din != -1 and drug_din == entry[1]:
             new_inv.append(entry)
     
     return new_inv

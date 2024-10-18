@@ -30,14 +30,10 @@ def inventory():
     # Filter data set according to user's search parameters.
     if request.method == 'POST':
         try:
-            drug_name = request.form['drug_name']
+            par = request.form['search_par']
         except:
-            drug_name = None
-        try:
-            din = request.form['drug_DIN']
-        except:
-            din = -1
-        data = utility.filter_inv(data, drug_name, din)
+            par = None
+        data = utility.filter_inv(data, par)
 
     # Renders the page.
     return render_template('inventory.html', data=data)
