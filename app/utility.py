@@ -80,6 +80,34 @@ def filter_inv(inv, par):
     
     return new_inv
 
+def filter_clients(clients, par):
+    """
+    Filters a given client dataset to only include entires containing 
+    the name or phone_number. Assumes both are valid non-empty strings. 
+    Expected format for inv and return:
+    [[full_name, birth_date, phone_number, active_prescriptions], ...]
+    [[str,       str,        str,          int],                  ...]
+    """
+    new_clients = []
+    search_str = ""     # Default 'ignore' value
+
+    # Validate search parameter
+    if valid_string(par):
+        search_str = str(par)
+
+    # Only search if string is non-empty.
+    if search_str != "":
+        for entry in clients:
+            # Search by name.
+            if search_str.lower() in entry[0].lower():
+                new_clients.append(entry)
+            # Search by phone number.
+            elif search_str == entry[2]:
+                new_clients.append(entry)
+    
+    return new_clients
+
+
 def valid_string(string):
     """Checks that the input is can be cast to a non-empty string."""
     if string == None:

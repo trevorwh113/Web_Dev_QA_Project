@@ -3,6 +3,7 @@ This file contains JavaScript functions related to search functionality
 and the corresponding buttons.
 */
 
+// Button styles based on each page type
 INVENTORY_STYLE = "margin-left: 20px; \
                 margin-up: 10px; \
                 padding: 5px; \

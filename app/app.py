@@ -21,12 +21,12 @@ def prescription():
     data = utility.get_all_clients()
 
     # Filter data set according to user's search parameters.
-    # if request.method == 'POST':
-    #     try:
-    #         par = request.form['search_par']
-    #     except:
-    #         par = None
-    #     data = utility.filter_inv(data, par)
+    if request.method == 'POST':
+        try:
+            par = request.form['search_par']
+        except:
+            par = None
+        data = utility.filter_clients(data, par)
 
     # Renders the page.
     return render_template('prescription.html', data=data)
