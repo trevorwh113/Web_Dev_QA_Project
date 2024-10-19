@@ -19,7 +19,12 @@ def prescription():
 @app.route('/prescription/client', methods=['GET', 'POST'])
 def client():
     if request.method == 'POST':
-        user_input = request.form['user_input']
+        user_input = [request.form['dname'],
+                      request.form['DIN'],
+                      request.form['dosage'],
+                      request.form['preBy'],
+                      request.form['interval']]
+        print(user_input)
         return render_template('client.html', user_input=user_input)
     return render_template('client.html', user_input=None)
 
@@ -27,9 +32,8 @@ def client():
 @app.route('/prescription/client/pre-creation', methods=['GET', 'POST'])
 def pre_creation():
     if request.method == 'POST':
-        user_input = request.form['user_input']
-        return render_template('create_prescription.html', user_input=user_input)
-    return render_template('create_prescription.html', user_input=None)
+        return render_template('create_prescription.html')
+    return render_template('create_prescription.html')
 
 # Inventory View Page----------------------------------------------
 @app.route('/inventory', methods=['GET', 'POST'])

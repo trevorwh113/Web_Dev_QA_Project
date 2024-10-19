@@ -7,18 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS style sheet for home page-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
-
-    <script> 
-        function submitForm() { 
-            document.getElementById("Form").submit(); 
-            window.location.href = '/prescription/client';
-        } 
-    </script>
 </head>
 
 
 <body>
-TEMP PAGE RAHHH
 
 
     <!--Create Header-->
@@ -29,7 +21,7 @@ TEMP PAGE RAHHH
    <!--Main Body-->
    <main>
     
-    <form id="Form" method="post">
+    <form id="myForm" method="POST" action="{{ url_for('client')}}">
         <label for="dname">Drug Name:</label><br>
         <input type="text" id="dname" name="dname" value=""><br>
         <label for="DIN">DIN:</label><br>
@@ -40,18 +32,17 @@ TEMP PAGE RAHHH
         <input type="text" id="preBy" name="preBy" value=""><br>
         <label for="interval">Refill Interval:</label><br>
         <input type="text" id="interval" name="interval" value=""><br>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-    <button style="background-color: #EA8B96; color: #863E46;"
-            onclick="submitForm()">
-        Submit
-        </button>
+    
 
     <button style="background-color: #EA8B96; color: #863E46;"
             onclick="window.location.href='/prescription/client';">
         Cancel
         </button>
     </main>
+
+    
 
 </body>
 </html>
