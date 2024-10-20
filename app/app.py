@@ -35,10 +35,10 @@ def prescription():
 # Client Prescription Page---------------------------------------------
 @app.route('/prescription/<phone_number>', methods=['GET', 'POST'])
 def client_pres_page(phone_number):
-    # Backend link to get the data.
+    # Backend link to get the data about the client.
     client = utility.get_client_by_phone(phone_number)
     data = [client.active_prescripts, client.old_prescripts]
-    # Render"s the page.
+    # Renders the page.
     return render_template('client_pres_page.html', phone_number=phone_number, 
                                                     first_name=client.first_name,
                                                     last_name=client.last_name,
@@ -49,13 +49,24 @@ def client_pres_page(phone_number):
 @app.route('/prescription/<phone_number>/pre-creation', methods=['GET', 'POST'])
 def pre_creation(phone_number):
     if request.method == 'POST':
+        # Backend link to save the data....
         user_input = [request.form['dname'],
                       request.form['DIN'],
                       request.form['dosage'],
                       request.form['preBy'],
                       request.form['interval']]
-        return render_template('client.html')
-    return render_template('create_prescription.html')
+        print(user_input)
+
+        # Backend link to get the data about the client.
+        client = utility.get_client_by_phone(phone_number)
+        data = [client.active_prescripts, client.old_prescripts]
+        # Renders the page.
+        return render_template('client_pres_page.html', phone_number=phone_number, 
+                                                        first_name=client.first_name,
+                                                        last_name=client.last_name,
+                                                        dob=client.dob,
+                                                        data=data)
+    return render_template('create_prescription.html', phone_number=phone_number)
 
   
 # Inventory View Page----------------------------------------------
