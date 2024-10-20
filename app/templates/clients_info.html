@@ -8,7 +8,6 @@
     <!--CSS style sheet for client page-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='clients_info.css') }}">
     <!--Link JavaScript + Pass the Flask variables-->
-    
     <script>
         data = {{ data | tojson }};
     </script>
@@ -18,17 +17,18 @@
 
 
 <body>
+    <!-- Wrapper for all content -->
     <div style = "min-height:100%; position:relative;">
-            <!--Create Header-->
+        <!--Create Header-->
         <header>
             <!--Back Button-->
             <i class="arrow left" onclick="window.location.href='/clients';" ></i>
-
         <h1 style="margin-bottom: 8px;">Client Page</h1>
     </header>
 
-    <!--Main Body-->
+    <!--Top Section Content-->
     <toplayer style="display: flex; flex-wrap: wrap;">
+        <!-- Client Info -->
         <div class="container">
             <h1 style="font-size: 28.8px;"> First Name: </h1> <p> {{ first_name }}</p>
             <h1 style="font-size: 28.8px;"> Last Name: </h1> <p> {{ last_name }}</p>
@@ -43,11 +43,15 @@
         </button>
     </toplayer>
 
+    <!--Top Section Content-->
     <midlayer style="padding-bottom:2vh">
+        <!-- Active Perscription List -->
         <div class="section">
             <p style="font-size: 32px;">Active Perscriptions</p> 
             <div class="scrollBox" id="item-list"></div>
         </div>
+
+        <!-- History of Perscriptions List -->
         <div class="section">
             <p style="font-size: 32px;">History</p> 
             <div class="scrollBox" id="old-list"></div>

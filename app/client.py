@@ -1,4 +1,22 @@
 class Client:
+    """
+    A class to represent a client.
+
+    Attributes:
+    ----------
+    first_name : str
+        The first name of the client.
+    last_name : str
+        The last name of the client.
+    phone_number : str
+        The client's phone number.
+    dob : str
+        The client's date of birth.
+    active_prescripts : list
+        A list to hold the client's active prescriptions.
+    old_prescripts : list
+        A list to hold the client's old prescriptions.
+    """
     def __init__(self, first_name, last_name, phone_number, dob):
         self.first_name = first_name
         self.last_name = last_name
@@ -8,6 +26,7 @@ class Client:
         self.old_prescripts = []
     
     def add_new_prescript(self, prescript):
+        
         self.active_prescripts.append(prescript)
 
     def add_old_prescript(self, prescript):
