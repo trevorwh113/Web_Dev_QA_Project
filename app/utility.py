@@ -2,6 +2,28 @@
 Provides utility functions, such as those to access
 the backend database and those to manipulate data.
 """
+from enum import Enum
+from client import Client
+
+class Status(Enum):
+    READY = 1
+    NEEDS_FILLING = 2
+    NO_RENEWAL = 3
+    RENEWAL_AVAIL = 4
+    NON_ACTIVE = 5
+
+def get_active_prescripts(client_phone):
+    """
+    Returns a list of all the perscription info stored 
+    in the database. Return list has format:
+    [[drug_name, din, next_refill_date, prescribed_by, status], ...]
+    [[str,       int, str,              str,           enum - Status],      ...]
+    """
+    # Mocks this functionality for now.
+    clients = get_all_clients()
+    for c in clients:
+        if c.phone_number == client_phone:
+            return c.active_prescripts
 
 def get_all_inv():
     """
@@ -31,6 +53,63 @@ def get_all_inv():
 
     return inv_data
 
+def get_all_clients_v2():
+    """
+    Returns a list of all the clients stored in the database. 
+    """
+    # *** MOCKING ACTUAL FUNCTION *** #
+
+    #mock perscriptions
+    prescripts = [
+        ["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1], 
+        
+        ["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2],
+
+        ["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3], 
+
+        ["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4], 
+
+        ["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1], 
+    ]
+
+
+    # Creating client objects
+    client1 = Client("John", "Doe", "(123)-456-7890", "28/09/2004")
+    client1.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
+    client1.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
+    client1.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
+    client1.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
+    client1.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
+    client1.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
+
+    client2 = Client("Jaine", "Fall", "(613)-999-7777", "8/02/2000")
+    client2.add_new_prescript(["Red Slime", 123456, "2024-10-23", "Dr. Jane Doe", 1])
+    
+
+    client3 = Client("Piper", "Mario", "(444)-656-6565", "17/04/1990")
+    client3.add_new_prescript("Prescription X")
+
+    client4 = Client("Car", "Binky", "(444)-224-2345", "10/10/2020")
+    client4.add_new_prescript("Prescription Y")
+    client4.add_new_prescript("Prescription Z")
+
+    client5 = Client("Helio", "Ptile", "(123)-767-5456", "8/02/2000")
+    client5.add_new_prescript("Prescription 1")
+    client5.add_new_prescript("Prescription 2")
+    client5.add_new_prescript("Prescription 3")
+    client5.add_new_prescript("Prescription 4")
+
+    client6 = Client("Cotton", "Candy", "(232)-456-7890", "22/12/2012")
+
+    client7 = Client("Last", "One", "(777)-666-5555", "14/12/3000")
+    for i in range(13):
+        client7.add_new_prescript(f"Prescription {i+1}")
+
+    # List of all clients
+    return [client1, client2, client3, client4, client5, client6, client7]
+
+
+### ***** INVENTORY FUNCTIONS ***** ###
 def get_all_clients():
     """
     Returns a list of all the clients stored in the database. 
