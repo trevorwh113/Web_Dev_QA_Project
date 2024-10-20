@@ -135,6 +135,13 @@ def filter_clients(clients, par):
     
     return new_clients
 
+def save_new_prescription(phone_number, pres_data):
+    """
+    Saves the prescriptiong information to the database
+    in the entry for the client with the matchign phone_number.
+    """
+    # Mock this for now--do nothing.
+    pass
 
 ### ***** INVENTORY FUNCTIONS ***** ###
 def get_all_inv():

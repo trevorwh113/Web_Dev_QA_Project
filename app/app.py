@@ -55,12 +55,11 @@ def pre_creation(phone_number):
                       request.form['dosage'],
                       request.form['preBy'],
                       request.form['interval']]
-        print(user_input)
+        utility.save_new_prescription(phone_number, user_input)
 
-        # Backend link to get the data about the client.
+        # Reloads the previous page.
         client = utility.get_client_by_phone(phone_number)
         data = [client.active_prescripts, client.old_prescripts]
-        # Renders the page.
         return render_template('client_pres_page.html', phone_number=phone_number, 
                                                         first_name=client.first_name,
                                                         last_name=client.last_name,
