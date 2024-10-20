@@ -25,7 +25,35 @@ def get_active_prescripts(client_phone):
         if c.phone_number == client_phone:
             return c.active_prescripts
 
-def get_all_clients():
+def get_all_inv():
+    """
+    Returns a list of all the inventory elements stored 
+    in the database. Return list has format:
+    [[drug_name, din, usage, dosage, quantity], ...]
+    [[str,       int, str,   str,    int],      ...]
+    """
+    
+    # Mocks this functionality for now.
+    inv_data = [
+        ["Drug Name", 904954, "Used to reduce inflamation of the sinuses which causes sneezing and runny noses.", 
+        "1 spray daily in each nostril", 10], 
+        
+        ["Paracetamol", 605699, "Used to sooth pain in the funny bone.", 
+        "1 ingested orally daily", 0], 
+       
+        ["Lisdexamfetamine", 565232, "Used to increase focus and quell hunger.", 
+        "1 ingested orally in the morning", 452], 
+       
+        ["Uranium-235", 445544, "Used to inflict a lethal dose of ionizing radiation.", 
+        "Rub over chest for 15 minutes daily", 3], 
+       
+        ["Green Slime", 999999, "Found under office sink, may hydrate skin?", 
+        "Apply topically to dry area", 47]
+    ]
+
+    return inv_data
+
+def get_all_clients_v2():
     """
     Returns a list of all the clients stored in the database. 
     """
@@ -81,8 +109,28 @@ def get_all_clients():
     return [client1, client2, client3, client4, client5, client6, client7]
 
 
-
 ### ***** INVENTORY FUNCTIONS ***** ###
+def get_all_clients():
+    """
+    Returns a list of all the clients stored in the database. 
+    Return list has format:
+    [[full_name, birth_date, phone_number, active_prescriptions], ...]
+    [[str,       str,        str,          int],                  ...]
+    """
+    
+    # Mocks this functionality for now.
+    client_data = [
+        ["John Doe", "28/09/2004", "(123)-456-7890", 3], 
+        ["Jaine Fall", "8/02/2000", "(613)-999-7777", 10], 
+        ["Piper Mario", "17/04/1990", "(444)-656-6565", 1], 
+        ["Car Binky", "10/10/2020", "(444)-224-2345", 2], 
+        ["Helio Ptile", "8/02/2000", "(123)-767-5456", 4], 
+        ["Cotton Candy", "22/12/2012", "(232)-456-7890", 0], 
+        ["Last One", "14/12/3000", "(777)-666-55555", 13]
+    ]
+
+    return client_data
+
 def filter_inv(inv, par):
     """
     Filters a given inventory dataset to only include entires containing 
