@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Client Page - MMS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--CSS style sheet for client page-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='client_pres_page.css') }}">
+    <!--Link JavaScript + Pass the Flask variables-->
+    
+    <script>
+        data = {{ data | tojson }};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='client_pres_page.js') }}"></script>
+
+</head>
+
+
+<body>
+    <!--Create Header-->
+    <header>
+         <!--Back Button-->
+            <i class="arrow left" onclick="window.location.href='/prescription';" ></i>
+
+        <h1 style="margin-bottom: 8px;">Client Page</h1>
+    </header>
+
+   <!--Main Body-->
+   <toplayer style="display: flex; align-items: center;">
+        <div class="container">
+            <h1 style="font-size: 1.8rem;"> First Name: </h1> <p> {{ first_name }}</p>
+            <h1 style="font-size: 1.8rem;"> Last Name: </h1> <p> {{ last_name }}</p>
+            <h1 style="font-size: 1.8rem;"> Phone Number: </h1> <p> {{ phone_number }}</p>
+            <h1 style="font-size: 1.8rem;"> D.O.B.: </h1> <p> {{ dob }}</p>
+        </div>
+
+        <!--Create Prescription Button-->
+        <button style="background-color: #EA8B96; color: #863E46; margin-left: 5px;"
+            onclick="window.location.href='/prescription/{{ phone_number }}/pre-creation';">
+            <span>&#43;</span> <h1 style="font-size: 1.8rem; margin: 10px;">Create Prescription</h1>
+        </button>
+    </toplayer>
+
+    <midlayer>
+        <div class="section">
+            <p style="font-size: 2rem;">Active Perscriptions</p> 
+            <div class="scrollBox" id="item-list"></div>
+        </div>
+        <div class="section">
+            <p style="font-size: 2rem;">History</p> 
+            <div class="scrollBox" id="old-list"></div>
+        </div>
+    </midlayer>
+    <footer>
+
+    </footer>
+
+</body>
+</html>
