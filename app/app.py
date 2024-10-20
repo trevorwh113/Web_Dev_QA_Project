@@ -15,9 +15,9 @@ def home():
     return render_template('home.html', user_input=None)
 
 
-# Prescription View Page--------------------------------------------
-@app.route('/prescription', methods=['GET', 'POST'])
-def prescription():
+# Clients Search Page--------------------------------------------
+@app.route('/clients', methods=['GET', 'POST'])
+def clients():
     # Backend link to get the data.
     data = utility.get_all_clients()
 
@@ -30,24 +30,24 @@ def prescription():
         data = utility.filter_clients(data, par)
 
     # Renders the page.
-    return render_template('prescription.html', data=data)
+    return render_template('clients_search.html', data=data)
 
-# Client Prescription Page---------------------------------------------
-@app.route('/prescription/<phone_number>', methods=['GET', 'POST'])
-def client_pres_page(phone_number):
+# Clients Information Page---------------------------------------------
+@app.route('/clients/<phone_number>', methods=['GET', 'POST'])
+def clients_info(phone_number):
     # Backend link to get the data about the client.
     client = utility.get_client_by_phone(phone_number)
     data = [client.active_prescripts, client.old_prescripts]
     # Renders the page.
-    return render_template('client_pres_page.html', phone_number=phone_number, 
-                                                    first_name=client.first_name,
-                                                    last_name=client.last_name,
-                                                    dob=client.dob,
-                                                    data=data)
+    return render_template('clients_info.html', phone_number=phone_number, 
+                                                first_name=client.first_name,
+                                                last_name=client.last_name,
+                                                dob=client.dob,
+                                                data=data)
 
-# Prescription Creation Page--------------------------------------------
-@app.route('/prescription/<phone_number>/pre-creation', methods=['GET', 'POST'])
-def pre_creation(phone_number):
+# Clients Prescription Creation Page-------------------------------------
+@app.route('/clients/<phone_number>/create', methods=['GET', 'POST'])
+def clients_create(phone_number):
     if request.method == 'POST':
         # Backend link to save the data....
         user_input = [request.form['dname'],
@@ -56,21 +56,14 @@ def pre_creation(phone_number):
                       request.form['preBy'],
                       request.form['interval']]
         utility.save_new_prescription(phone_number, user_input)
-
-        # Reloads the previous page.
-        client = utility.get_client_by_phone(phone_number)
-        data = [client.active_prescripts, client.old_prescripts]
-        return render_template('client_pres_page.html', phone_number=phone_number, 
-                                                        first_name=client.first_name,
-                                                        last_name=client.last_name,
-                                                        dob=client.dob,
-                                                        data=data)
-    return render_template('create_prescription.html', phone_number=phone_number)
+        # Reloads the client's information page.
+        return clients_info(phone_number)
+    return render_template('clients_create.html', phone_number=phone_number)
 
   
-# Inventory View Page----------------------------------------------
+# Inventory Search Page----------------------------------------------
 @app.route('/inventory', methods=['GET', 'POST'])
-def inventory():
+def inventory_search():
     # Backend link to get the data.
     data = utility.get_all_inv()
 
@@ -83,12 +76,12 @@ def inventory():
         data = utility.filter_inv(data, par)
 
     # Renders the page.
-    return render_template('inventory.html', data=data)
+    return render_template('inventory_search.html', data=data)
 
-# Drug Information Page---------------------------------------------
+# Inventory Information Page ---------------------------------------------
 @app.route('/inventory/<din>', methods=['GET', 'POST'])
-def drug_info_page(din):
-    return render_template('drug_info_page.html', din=din)
+def inventory_info(din):
+    return render_template('inventory_info.html', din=din)
 
 
 # Supply Order View Page--------------------------------------------

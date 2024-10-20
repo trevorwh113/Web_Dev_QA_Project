@@ -71,7 +71,7 @@ function show_items() {
             // Set the onclick event to bring you to the right page
             button.id = data[i][2];
             button.onclick = function() {
-                window.location.href="/prescription/"+this.id
+                window.location.href="/clients/"+this.id
             }                
         }
         

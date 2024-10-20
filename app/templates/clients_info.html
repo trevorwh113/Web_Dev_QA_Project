@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS style sheet for client page-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='client_pres_page.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='clients_info.css') }}">
     <!--Link JavaScript + Pass the Flask variables-->
     
     <script>
         data = {{ data | tojson }};
     </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='client_pres_page.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='clients_info.js') }}"></script>
 
 </head>
 
@@ -21,7 +21,7 @@
     <!--Create Header-->
     <header>
          <!--Back Button-->
-            <i class="arrow left" onclick="window.location.href='/prescription';" ></i>
+            <i class="arrow left" onclick="window.location.href='/clients';" ></i>
 
         <h1 style="margin-bottom: 8px;">Client Page</h1>
     </header>
@@ -37,7 +37,7 @@
 
         <!--Create Prescription Button-->
         <button style="background-color: #EA8B96; color: #863E46; margin-left: 5px;"
-            onclick="window.location.href='/prescription/{{ phone_number }}/pre-creation';">
+            onclick="window.location.href='/clients/{{ phone_number }}/create';">
             <span>&#43;</span> <h1 style="font-size: 1.8rem; margin: 10px;">Create Prescription</h1>
         </button>
     </toplayer>

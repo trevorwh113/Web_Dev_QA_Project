@@ -1,6 +1,6 @@
 /*
-This file contains JavaScript functions related to search functionality
-and the corresponding buttons.
+This file contains JavaScript functions related to active and old
+prescriptions and the corresponding buttons.
 */
 
 // Button styles based on each page type
