@@ -45,19 +45,9 @@ def client_pres_page(phone_number):
                                                     dob=client.dob,
                                                     data=data)
 
-# # Client View Page--------------------------------------------
-# @app.route('/prescription/client', methods=['GET', 'POST'])
-# #will prolly have client pushed through from other page so client(client): and data will be easier
-# def client():
-#     # Backend link to get the data.
-#     client = utility.get_all_clients_v2()[0]
-#     data = [client.active_prescripts, client.old_prescripts]
-#     # Render"s the page.
-#     return render_template('client.html', data=data)
-
-# Prescription Creation View Page--------------------------------------------
-@app.route('/prescription/client/pre-creation', methods=['GET', 'POST'])
-def pre_creation():
+# Prescription Creation Page--------------------------------------------
+@app.route('/prescription/<phone_number>/pre-creation', methods=['GET', 'POST'])
+def pre_creation(phone_number):
     if request.method == 'POST':
         user_input = request.form['user_input']
         return render_template('create_prescription.html', user_input=user_input)
