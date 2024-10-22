@@ -162,3 +162,14 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 .vscode/settings.json
+app/venvsp/pyvenv.cfg
+app/venvsp/Scripts/activate
+app/venvsp/Scripts/activate.bat
+app/venvsp/Scripts/Activate.ps1
+app/venvsp/Scripts/deactivate.bat
+app/venvsp/Scripts/flask.exe
+app/venvsp/Scripts/pip.exe
+app/venvsp/Scripts/pip3.12.exe
+app/venvsp/Scripts/pip3.exe
+app/venvsp/Scripts/python.exe
+app/venvsp/Scripts/pythonw.exe
