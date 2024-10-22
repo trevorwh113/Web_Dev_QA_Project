@@ -30,12 +30,19 @@
     python app.py
     ```
 6. Follow the link from the output (or copy-paste into your browser).
-## Running The Project 
-After following steps for **Running The Project**, terminate the execution of app.py but keep the virtual machine active.
-Run the following command to run **all** tests:
- ```bash
-pytest 
-```
+## Running The Tests 
+1. After following steps for **Running The Project**, terminate the execution of app.py but keep the virtual machine active.
+
+2. Run the following command to run **all** tests:
+     ```bash
+    pytest 
+    ```
+3. To choose specific test files, run the following command:
+     ```bash
+    pytest test_name.py
+    ```
+   where test_name is the name of the test file.
+
 ## Notes
 Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.
 
