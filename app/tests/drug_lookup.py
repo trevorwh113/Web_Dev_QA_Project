@@ -1,6 +1,13 @@
+"""
+This file contains unit tests for the drug_lookup feature,
+using a mixture of decision partitioning (white-box), and
+output partitioning (black-box).
+"""
+
 import pytest
 import utility
 
+# ------- INPUT FIXTURES -------
 @pytest.fixture
 def types():
     """Defines basic data types for comparisons."""
@@ -16,7 +23,8 @@ def inventories():
     return inv1, inv2
 
 
-# Success case unit test for get_all_inv() ------------------------------
+# ------- UNIT TESTING -------
+# Success case for get_all_inv() ------------------------------
 def test_get_all_inv(types):
     """
     Success case: get_all_inv() returns a non-empty 2d-list 
@@ -37,7 +45,7 @@ def test_get_all_inv(types):
     assert type(entry[3]) == types["STR"], "dosage should be a string"
     assert type(entry[4]) == types["INT"], "quantity should be an integer"
 
-# Success case unit tests for filter_inv() ------------------------------
+# Success cases for filter_inv() ------------------------------
 def test_filter_inv_1(inventories):
     """Success case: filter_inv() finds 1 entry by DIN"""
     assert utility.filter_inv(inventories[0], 0) == inventories[0], "Failed to find included DIN"
@@ -62,11 +70,44 @@ def test_filter_inv_6(inventories):
     """Success case: filter_inv() finds 2 entires by valid drug_name"""
     assert utility.filter_inv(inventories[1], "a") == inventories[1], "Failed to find multiple entries with partial drug name"
 
-# Failure case unit tests for filter_inv() ------------------------------
+# Failure cases for filter_inv() ------------------------------
 def test_filter_inv_fail_1():
-    """Failure case: filter_inv() throws exception if not given a list."""
-    pass
+    """Failure case: filter_inv() throws TypeError if inv is not iterable."""
+    try:
+        utility.filter_inv(0, "a")
+        assert False, "Did not throw TypeError for inv not iterable"
+    except TypeError:
+        assert True
 
 def test_filter_inv_fail_2():
-    """Failure case: filter_inv() throws exception is not given a list."""
-    pass
+    """Failure case: filter_inv() throws TypeError if inv[entry] is not indexable"""
+    try:
+        utility.filter_inv([0], "a")
+        assert False, "Did not throw TypeError for inv[entry] not indexable"
+    except TypeError:
+        assert True
+
+def test_filter_inv_fail_3():
+    """Failure case: filter_inv() throws IndexError if inv[entry][0] does not exist"""
+    try:
+        utility.filter_inv([[]], "a")
+        assert False, "Did not throw IndexError for inv[entry][0] does not exist"
+    except IndexError:
+        assert True
+
+def test_filter_inv_fail_4():
+    """Failure case: filter_inv() throws AttributeError if inv[entry][0] is not a string"""
+    try:
+        utility.filter_inv([[0]], "a")
+        assert False, "Did not throw AttributeError for inv[entry][0] not a string"
+    except AttributeError:
+        assert True
+
+def test_filter_inv_fail_5():
+    """Failure case: filter_inv() throws IndexError if inv[entry][1] does not exist"""
+    try:
+        utility.filter_inv([[0]], 0)
+        assert False, "Did not throw IndexError for inv[entry][1] does not exist"
+    except IndexError:
+        assert True
+
