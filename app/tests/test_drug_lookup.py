@@ -1,112 +1,90 @@
 """
-This file contains unit tests for the drug_lookup feature,
-using a mixture of decision partitioning (white-box), and
-output partitioning (black-box).
+This file contains additional unit tests for the drug_lookup
+feature, from a front-end perspective (the flask routes).
 """
+from app import app
 import pytest
-import utility
 
-# ------- INPUT FIXTURES -------
-@pytest.fixture
-def types():
-    """Defines basic data types for comparisons."""
-    return {"STR": type(""),
-            "INT": type(0),
-            "LST": type([])}
-
-@pytest.fixture
-def inventories():
-    """Defines sample inventories used throughout test suite."""
-    inv1 = [["a", 0, "b", "c", 1]]
-    inv2 = [["a", 0, "b", "c", 1], ["ab", 0, "b", "c", 1]]
-    return inv1, inv2
-
-
-# ------- UNIT TESTING -------
-# Success case for get_all_inv() ------------------------------
-def test_get_all_inv(types):
+# Success cases for /inventory route ------------------------------
+def test_load_inventory_page():
     """
-    Success case: get_all_inv() returns a non-empty 2d-list 
-    matching: [[str, int, str, str, int], ...]
+    Success case: Tests that the inventory page is loaded with
+    all five entries (GET).
     """
-    data = utility.get_all_inv()
-    # Check the outside list.
-    assert type(data) == types["LST"], "Return value should be a list"
-    assert len(data) > 0, "Return value should be non-empty"
-    # Check the inside list.
-    entry = data[0]
-    assert type(entry) == types["LST"], "Entry values should be lists"
-    assert len(entry) == 5, "Entry values should have 5 elements"
-    # Check the values of the inside list.
-    assert type(entry[0]) == types["STR"], "drug_name should be a string"
-    assert type(entry[1]) == types["INT"], "DIN should be an integer"
-    assert type(entry[2]) == types["STR"], "usage should be a string"
-    assert type(entry[3]) == types["STR"], "dosage should be a string"
-    assert type(entry[4]) == types["INT"], "quantity should be an integer"
+    # Load the search page without any search arguments (GET)
+    response = app.test_client().get('/inventory')
+    # Make sure correct page comes up.
+    assert response.status_code == 200
+    assert b"Search Inventory" in response.data, "Did not load inventory page correctly"
+    # Make sure the data has been correctly loaded in.
+    # ** May have to change once backend is implemented.
+    assert b"904954" in response.data, "Did not load a drug entry correctly"
+    assert b"605699" in response.data, "Did not load a drug entry correctly"
+    assert b"565232" in response.data, "Did not load a drug entry correctly"
+    assert b"445544" in response.data, "Did not load a drug entry correctly"
+    assert b"999999" in response.data, "Did not load a drug entry correctly"
 
-# Success cases for filter_inv() ------------------------------
-def test_filter_inv_1(inventories):
-    """Success case: filter_inv() finds 1 entry by DIN"""
-    assert utility.filter_inv(inventories[0], 0) == inventories[0], "Failed to find included DIN"
+def test_search_inventory_by_name():
+    """
+    Success case: Tests that a search loads the page with only the the 
+    entries matching the search parameter - drug_name (POST).
+    """
+    # Load the search page with a search argument (POST)
+    response = app.test_client().post('/inventory', data={"search_par": "am"})
+    assert response.status_code == 200
+    # Make sure the data has been correctly loaded in.
+    # ** May have to change once backend is implemented.
+    assert b"904954" in response.data, "Did not load a drug entry correctly"
+    assert b"605699" in response.data, "Did not load a drug entry correctly"
+    assert b"565232" in response.data, "Did not load a drug entry correctly"
+    assert b"445544" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"999999" not in response.data, "Mistakenly loaded a drug entry"
 
-def test_filter_inv_2(inventories):
-    """Success case: filter_inv() finds 0 entries by DIN"""
-    assert utility.filter_inv(inventories[0], 1) == [], "Wrongly found excluded DIN"
+def test_search_inventory_by_din():
+    """
+    Success case: Tests that a search loads the page with only the the 
+    entries matching the search parameter - din (POST).
+    """
+    # Load the search page with a search argument (POST)
+    response = app.test_client().post('/inventory', data={"search_par": 445544})
+    assert response.status_code == 200
+    # Make sure the data has been correctly loaded in.
+    # ** May have to change once backend is implemented.
+    assert b"904954" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"605699" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"565232" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"445544" in response.data, "Did not load a drug entry correctly"
+    assert b"999999" not in response.data, "Mistakenly loaded a drug entry"
 
-def test_filter_inv_3(inventories):
-    """Success case: filter_inv() finds 1 entry by valid drug_name"""
-    assert utility.filter_inv(inventories[0], "a") == inventories[0], "Failed to find included drug name"
+# Failure cases for /inventory route ------------------------------
+def test_search_inventory_by_name_invalid():
+    """
+    Failure case: Tests that a search loads the page with no entries
+    given an invalid search parameter (POST).
+    """
+    # Load the search page with a search argument (POST)
+    response = app.test_client().post('/inventory', data={"search_par": ""})
+    assert response.status_code == 200
+    # Make sure the data has been correctly loaded in.
+    # ** May have to change once backend is implemented.
+    assert b"904954" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"605699" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"565232" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"445544" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"999999" not in response.data, "Mistakenly loaded a drug entry"
 
-def test_filter_inv_4(inventories):
-    """Success case: filter_inv() finds 0 entries by valid drug_name"""
-    assert utility.filter_inv(inventories[0], "b") == [], "Wrongly found excluded drug name"
-
-def test_filter_inv_5(inventories):
-    """Success case: filter_inv() finds 0 entry by invalid DIN"""
-    assert utility.filter_inv(inventories[0], "") == [], "Wrongly searched using invalid drug name"
-
-def test_filter_inv_6(inventories):
-    """Success case: filter_inv() finds 2 entires by valid drug_name"""
-    assert utility.filter_inv(inventories[1], "a") == inventories[1], "Failed to find multiple entries with partial drug name"
-
-# Failure cases for filter_inv() ------------------------------
-def test_filter_inv_fail_1():
-    """Failure case: filter_inv() throws TypeError if inv is not iterable."""
-    try:
-        utility.filter_inv(0, "a")
-        assert False, "Did not throw TypeError for inv not iterable"
-    except TypeError:
-        assert True
-
-def test_filter_inv_fail_2():
-    """Failure case: filter_inv() throws TypeError if inv[entry] is not indexable"""
-    try:
-        utility.filter_inv([0], "a")
-        assert False, "Did not throw TypeError for inv[entry] not indexable"
-    except TypeError:
-        assert True
-
-def test_filter_inv_fail_3():
-    """Failure case: filter_inv() throws IndexError if inv[entry][0] does not exist"""
-    try:
-        utility.filter_inv([[]], "a")
-        assert False, "Did not throw IndexError for inv[entry][0] does not exist"
-    except IndexError:
-        assert True
-
-def test_filter_inv_fail_4():
-    """Failure case: filter_inv() throws AttributeError if inv[entry][0] is not a string"""
-    try:
-        utility.filter_inv([[0]], "a")
-        assert False, "Did not throw AttributeError for inv[entry][0] not a string"
-    except AttributeError:
-        assert True
-
-def test_filter_inv_fail_5():
-    """Failure case: filter_inv() throws IndexError if inv[entry][1] does not exist"""
-    try:
-        utility.filter_inv([[0]], 0)
-        assert False, "Did not throw IndexError for inv[entry][1] does not exist"
-    except IndexError:
-        assert True
-
+def test_search_inventory_by_name_not_found():
+    """
+    Failure case: Tests that a search loads the page with no entries
+    given an search parameter that is not in the data (POST).
+    """
+    # Load the search page with a search argument (POST)
+    response = app.test_client().post('/inventory', data={"search_par": 111111})
+    assert response.status_code == 200
+    # Make sure the data has been correctly loaded in.
+    # ** May have to change once backend is implemented.
+    assert b"904954" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"605699" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"565232" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"445544" not in response.data, "Mistakenly loaded a drug entry"
+    assert b"999999" not in response.data, "Mistakenly loaded a drug entry"
