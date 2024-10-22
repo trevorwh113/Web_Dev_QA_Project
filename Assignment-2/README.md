@@ -1,5 +1,5 @@
 ## Running The Project 
-### Steps modified from example [repository] (https://github.com/anwardr/Cisc327-F24/blob/343c0f056c658d28d902f44da12618a731def3ce/how-to-run.md).
+### Steps modified from example [repository](https://github.com/anwardr/Cisc327-F24/blob/343c0f056c658d28d902f44da12618a731def3ce/how-to-run.md).
 
 1. Make sure you are in the root directory of the project.
 2. In the root directory, create a virtual environment by running the following command:
