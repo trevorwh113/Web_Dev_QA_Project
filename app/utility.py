@@ -15,6 +15,7 @@ from client import Client
 
 ### ***** PRESCRIPTION FUNCTIONS ***** ###
 def get_active_prescripts(client_phone):
+    ## NOT IN USE FOR A2
     """
     Returns a list of all the perscription info stored 
     in the database. Return list has format:
@@ -22,11 +23,9 @@ def get_active_prescripts(client_phone):
     [[str,       int, str,              str,           enum - Status],      ...]
     """
     # Mocks this functionality for now.
-    clients = get_all_clients()
-    for c in clients:
-        # looks up client by phone number because it is a unique value (unlike a name)
-        if c.phone_number == client_phone:
-            return c.active_prescripts
+    c = get_client_by_phone(client_phone)
+   
+    return c.active_prescripts
 
 
 ### ***** CLIENT FUNCTIONS ***** ###
@@ -38,7 +37,7 @@ def get_all_clients():
     [[str,       str,        str,          int],                  ...]
     """
     
-    # Mocks this functionality for now.
+    # Mocks this functionality for now. Does not use Client class.
     client_data = [
         ["John Doe", "28/09/2004", "(123)-456-7890", 3], 
         ["Jaine Fall", "8/02/2000", "(613)-999-7777", 10], 
@@ -59,7 +58,7 @@ def get_client_by_phone(phone_number):
     # *** MOCKING ACTUAL FUNCTION *** #
 
 
-    # Creating client objects
+    # Creating client objects; all will be replaced with a database search
     client1 = Client("John", "Doe", "(123)-456-7890", "28/09/2004")
     client1.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
     client1.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
@@ -121,8 +120,7 @@ def get_client_by_phone(phone_number):
     for client in list_clients:
         if client.phone_number == phone_number:
             return client
-    # For the sake of this, return client1 if it cannot find, but should always find
-    return client1
+    return 0
 
 def filter_clients(clients, par):
     """
