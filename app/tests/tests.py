@@ -1,9 +1,6 @@
 import pytest
 import utility
 
-#test
-
-
 
 #Unit tests for validate_string() and validate_int()
 def test_valstring1():
