@@ -3,7 +3,10 @@ import utility
 
 
 #Unit tests for validate_string() and validate_int()
-def test_valstring1():
+def test_valstring0():
+    assert(utility.valid_string()) == False 
+
+def test_valstring0():
     assert(utility.valid_string("")) == False 
 
 def test_valstring2():
@@ -12,8 +15,8 @@ def test_valstring2():
 def test_valstring3():
     assert(utility.valid_string("hawk tuah")) == True
 
-def test_valint1():
-    assert(utility.valid_int()) == False
+def test_valint0():
+    assert(utility.valid_int("")) == False
 
 def test_valint1():
     assert(utility.valid_int("yummers")) == False
