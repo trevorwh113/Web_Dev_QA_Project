@@ -1,6 +1,10 @@
+"""
+Success and failure unit test cases for the get_client_by_phone()
+backend-link function prodived in uility.py.
+"""
 import utility, pytest
 from client import Client
-    
+
 def test_existing_client():
     """
     GIVEN a client phone number

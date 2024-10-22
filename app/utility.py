@@ -217,7 +217,7 @@ def filter_inv(inv, par):
 
 ### ***** MISC FUNCTIONS ***** ###
 def valid_string(string):
-    """Checks that the input is can be cast to a non-empty string."""
+    """Checks that the input can be cast to a non-empty string."""
     if string == None:
         return False
     else:

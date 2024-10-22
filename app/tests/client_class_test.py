@@ -1,5 +1,7 @@
-
-# import utility
+"""
+Tests the client class used to transfer certain kinds of 
+information about clients. 
+"""
 from client import Client
 import pytest
 
@@ -30,8 +32,6 @@ def test_add_new_prescript():
     client.add_new_prescript(prescription)
     assert prescription in client.active_prescripts
     assert len(client.active_prescripts) == 1
-
-
 
 def test_add_old_prescript():
     """

@@ -3,7 +3,6 @@ This file contains unit tests for the drug_lookup feature,
 using a mixture of decision partitioning (white-box), and
 output partitioning (black-box).
 """
-
 import pytest
 import utility
 
