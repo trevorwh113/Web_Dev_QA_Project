@@ -6,7 +6,7 @@ from app import app
 import pytest
 
 # Success cases for /inventory route ------------------------------
-def test_load_inventory_page():
+def test_load_inventory_search_page():
     """
     Success case: Tests that the inventory page is loaded with
     all five entries (GET).
@@ -57,7 +57,7 @@ def test_search_inventory_by_din():
     assert b"999999" not in response.data, "Mistakenly loaded a drug entry"
 
 # Failure cases for /inventory route ------------------------------
-def test_search_inventory_by_name_invalid():
+def test_search_inventory_invalid():
     """
     Failure case: Tests that a search loads the page with no entries
     given an invalid search parameter (POST).
@@ -73,10 +73,10 @@ def test_search_inventory_by_name_invalid():
     assert b"445544" not in response.data, "Mistakenly loaded a drug entry"
     assert b"999999" not in response.data, "Mistakenly loaded a drug entry"
 
-def test_search_inventory_by_name_not_found():
+def test_search_inventory_not_found():
     """
     Failure case: Tests that a search loads the page with no entries
-    given an search parameter that is not in the data (POST).
+    given a search parameter that is not in the data (POST).
     """
     # Load the search page with a search argument (POST)
     response = app.test_client().post('/inventory', data={"search_par": 111111})
