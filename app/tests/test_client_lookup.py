@@ -5,7 +5,7 @@ feature, from a front-end perspective (the flask routes).
 from app import app
 import pytest
 
-# Success cases for /inventory route ------------------------------
+# Success cases for /clients route ------------------------------
 def test_load_clients_search_page():
     """
     Success case: Tests that the clients search page is loaded with
@@ -62,7 +62,7 @@ def test_search_client_by_phone():
     assert b"(232)-456-7890" not in response.data, "Mistakenly loaded a client entry"
     assert b"(777)-666-55555" in response.data, "Did not load a client entry correctly"
 
-# Failure cases for /inventory route ------------------------------
+# Failure cases for /clients route ------------------------------
 def test_search_client_invalid():
     """
     Failure case: Tests that a search loads the page with no entries
