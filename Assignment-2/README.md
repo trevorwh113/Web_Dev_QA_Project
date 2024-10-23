@@ -1,7 +1,7 @@
 ## Running The Project 
 ### Steps modified from example [repository](https://github.com/anwardr/Cisc327-F24/blob/343c0f056c658d28d902f44da12618a731def3ce/how-to-run.md).
 
-1. Make sure you are in the root directory of the project.
+1. Make sure you are in the root directory of the project (Group-8-FS).
 2. In the root directory, create a virtual environment by running the following command:
 
     ```bash
@@ -24,12 +24,13 @@
     ```bash
     pip install -r requirements.txt
     ```
-5. Run the following command to start the server:
+5. Change your directory to Group-8-FS/app using cd.
+6. Run the following command to start the server:
 
     ```bash
     python app.py
     ```
-6. Follow the link from the output (or copy-paste into your browser).
+7. Follow the link from the output (or copy-paste into your browser).
 ## Running The Tests 
 1. After following steps for **Running The Project**, terminate the execution of app.py but keep the virtual machine active.
 
@@ -42,6 +43,20 @@
     pytest test_name.py
     ```
    where test_name is the name of the test file.
+
+## File Suite(s) Breakdown
+### Unit Tests
+test_client_by_name.py
+test_client_class.py
+test_client_filter.py
+test_drug_filter.py
+test_valid_input.py
+
+### Functional Tests (related to test cases from A1)
+test_client_lookup.py
+test_drug_lookup.py
+test_view_prescriptions.py
+
 
 ## Notes
 Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.
