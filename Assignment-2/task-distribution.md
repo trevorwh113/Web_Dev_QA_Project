@@ -32,7 +32,7 @@
 | Implemented UI for prescription creation page |
 | Created created tests for int and string validation |
 | Created tests for client fetching and lookup |
-| Created fuctionanal unit tests: test_prescription_creation.py and test_view_prescriptions.py |
+| Created fuctional unit tests: test_prescription_creation.py and test_view_prescriptions.py |
 
 ## Features Implemented
 We chose 3 of our 6 features to implement in this assignment, and they are as follows:
