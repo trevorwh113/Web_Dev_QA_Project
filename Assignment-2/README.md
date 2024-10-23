@@ -56,6 +56,7 @@ test_valid_input.py
 test_client_lookup.py
 test_drug_lookup.py
 test_view_prescriptions.py
+test_prescription_creation.py
 
 
 ## Notes
