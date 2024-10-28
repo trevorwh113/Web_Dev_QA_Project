@@ -107,7 +107,7 @@ def get_client_by_phone(phone_number):
     client6.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
     client6.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
 
-    client7 = Client("Last", "One", "(777)-666-5555", "14/12/3000")
+    client7 = Client("Last", "One", "(777)-666-55555", "14/12/3000")
     client7.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
     client7.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
     client7.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
