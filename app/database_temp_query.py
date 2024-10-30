@@ -11,9 +11,9 @@ collection_name = dbname["clients"]
  
 item_details = collection_name.find()
 
+
 for item in item_details:
-    # This does not give a very readable output
-    print(item["first_name"])
-    print(item["last_name"])
-    print(item["phone_number"])
-    print(item["active_pres"][-1])
+    for value in item.values():
+        print(value)
+    # for value in 
+    print()

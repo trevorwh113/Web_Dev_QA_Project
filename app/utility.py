@@ -2,31 +2,28 @@
 Provides utility functions, such as those to access
 the backend database and those to manipulate data.
 """
-# from enum import Enum
-from client import Client
+from database import get_database
 
-# MAY USE THIS LATER
-# class Status(Enum):
-#     READY = 1
-#     NEEDS_FILLING = 2
-#     NO_RENEWAL = 3
-#     RENEWAL_AVAIL = 4
-#     NON_ACTIVE = 5
+
 
 ### ***** PRESCRIPTION FUNCTIONS ***** ###
-def get_active_prescripts(client_phone):
-    ## NOT IN USE FOR A2
+def get_active_prescripts(client):
     """
     Returns a list of all the perscription info stored 
     in the database. Return list has format:
     [[drug_name, din, next_refill_date, prescribed_by, status], ...]
     [[str,       int, str,              str,           enum - Status],      ...]
-    """
-    # Mocks this functionality for now.
-    c = get_client_by_phone(client_phone)
-   
-    return c.active_prescripts
+    """  
+    return client[5]
 
+def get_old_prescripts(client):
+    """
+    Returns a list of all the old perscription info stored 
+    in the database. Return list has format:
+    [[drug_name, din, next_refill_date, prescribed_by, status], ...]
+    [[str,       int, str,              str,           enum - Status],      ...]
+    """  
+    return client[6]
 
 ### ***** CLIENT FUNCTIONS ***** ###
 def get_all_clients():
@@ -37,89 +34,37 @@ def get_all_clients():
     [[str,       str,        str,          int],                  ...]
     """
     
-    # Mocks this functionality for now. Does not use Client class.
-    client_data = [
-        ["John Doe", "28/09/2004", "(123)-456-7890", 3], 
-        ["Jaine Fall", "8/02/2000", "(613)-999-7777", 10], 
-        ["Piper Mario", "17/04/1990", "(444)-656-6565", 1], 
-        ["Car Binky", "10/10/2020", "(444)-224-2345", 2], 
-        ["Helio Ptile", "8/02/2000", "(123)-767-5456", 4], 
-        ["Cotton Candy", "22/12/2012", "(232)-456-7890", 0], 
-        ["Last One", "14/12/3000", "(777)-666-55555", 13]
-    ]
+    # Get the database using the method we defined in pymongo_test_insert file
+    client_list = []
+    dbname = get_database()
+    
+    # Retrieve a collection named "user_1_items" from database
+    collection_name = dbname["clients"]
 
-    return client_data
+    item_details = collection_name.find()
+
+
+    for item in item_details:
+        client = []
+        for value in item.values():
+            client.append(value)
+        client_list.append(client)
+
+    return client_list
 
 def get_client_by_phone(phone_number):
     """
     Returns more detailed information about a client,
     searching the databased using their phone number. 
     """
-    # *** MOCKING ACTUAL FUNCTION *** #
 
+    #get all clients
+    clients = get_all_clients()
 
-    # Creating client objects; all will be replaced with a database search
-    client1 = Client("John", "Doe", "(123)-456-7890", "28/09/2004")
-    client1.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client1.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client1.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client1.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client1.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client1.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    client2 = Client("Jaine", "Fall", "(613)-999-7777", "8/02/2000")
-    client2.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client2.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client2.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client2.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client2.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client2.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-    
-    client3 = Client("Piper", "Mario", "(444)-656-6565", "17/04/1990")
-    client3.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client3.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client3.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client3.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client3.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client3.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    client4 = Client("Car", "Binky", "(444)-224-2345", "10/10/2020")
-    client4.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client4.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client4.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client4.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client4.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client4.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    client5 = Client("Helio", "Ptile", "(123)-767-5456", "8/02/2000")
-    client5.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client5.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client5.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client5.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client5.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client5.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    client6 = Client("Cotton", "Candy", "(232)-456-7890", "22/12/2012")
-    client6.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client6.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client6.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client6.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client6.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client6.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    client7 = Client("Last", "One", "(777)-666-55555", "14/12/3000")
-    client7.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client7.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client7.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client7.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client7.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client7.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    # Mocks returning the correct entry.
-    list_clients = [client1, client2, client3, client4, client5, client6, client7]
-    for client in list_clients:
-        if client.phone_number == phone_number:
-            return client
+    # check if there is a phone number that matches the param in the client list
+    for c in clients:
+        if c[1] == phone_number:
+            return c
     return 0
 
 def filter_clients(clients, par):
