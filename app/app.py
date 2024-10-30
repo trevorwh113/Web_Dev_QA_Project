@@ -33,7 +33,7 @@ def clients():
     return render_template('clients_search.html', data=data)
 
 # Clients Information Page---------------------------------------------
-@app.route('/clients/<phone_number>', methods=['GET'])
+@app.route('/clients/<phone_number>', methods=['GET', 'POST'])
 def clients_info(phone_number):
     # Backend link to get the data about the client.
     client = utility.get_client_by_phone(phone_number)
@@ -86,13 +86,15 @@ def supply():
 
 ################################################################
 @app.route('/update_list', methods=['POST'])
-def process():
+def update_lists():
     data = request.get_json() # retrieve the data sent from JavaScript
     # process the data using Python code
-    result = data['value']
+    phone = data['id']
+    actives = data['active']
+    olds = data['old']
 
-    
-    return jsonify(result=result)
+    utility.update_prescriptions(phone, actives, olds)
+    return jsonify(result=phone)
 
 if __name__ == '__main__':
     app.run(debug=True)

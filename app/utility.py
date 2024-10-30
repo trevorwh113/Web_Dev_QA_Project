@@ -17,43 +17,8 @@ def get_active_prescripts(client):
   
     return client[4]
 
-def update_prescriptions(c_phone, prescript):
+def update_prescriptions(c_phone, actives, olds):
     db = get_database()
-    success = False
-    c = get_client_by_phone(c_phone)
-    active = get_active_prescripts(c)
-    old = get_old_prescripts(c)
-    
-# Check if in active list
-    print(len(active))
-    for i in range(len(active)):
-        p = active[i]
-        if p[1] == prescript[1]:
-            if prescript[4] == 5:
-                active.pop(i)
-                old.append(prescript)
-                success = True
-                break
-            else:
-                active[i]=prescript
-                success = True
-                break
-
-    # Check if in old list
-    if success == False:
-        for i in range(len(old)):
-            p = old[i]
-            if p[1] == prescript[1]:
-                if prescript[4] != 5:
-                    old.pop(i)
-                    active.append(prescript)
-                    success = True
-                    break  
-                else:
-                    old[i]=prescript
-                    success = True
-                    break
-
 
     clients = db["clients"]
 
@@ -61,8 +26,8 @@ def update_prescriptions(c_phone, prescript):
 
     update_operation = { 
         '$set' : { 
-            'active_pres' : active,
-            'old_pres' : old
+            'active_pres' : actives,
+            'old_pres' : olds
         }
     }
 
@@ -261,4 +226,4 @@ def OLD_get_all_clients():
     return client_data
 
 
-update_prescriptions("(123)-456-7890", ["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 5])
+# update_prescriptions("(123)-456-7890", ["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 5])

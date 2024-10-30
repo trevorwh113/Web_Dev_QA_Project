@@ -35,7 +35,6 @@ function show_items() {
     */
 
     // For each item in the data for list 1 (active items) passed by Flask...
-    send_data(client[4][0])
     num_items = client[4].length;
     for (i = 0; i < num_items; i++) {
         // Create an iten
@@ -180,6 +179,7 @@ Additionally:
                     client[5].push(client[4][i])
                     client[4].splice(i, 1);
 
+                    send_data(client[0], client[4], client[5])
                     
                     // Remove the corresponding item from the DOM
                     itemList = document.getElementById("item-list");                
@@ -211,7 +211,8 @@ Additionally:
                     client[4].push(client[5][idx])
                     client[5].splice(idx, 1);
 
-                    
+                    send_data(client[0], client[4], client[5])
+
                     // Remove the corresponding item from the DOM
                     itemList = document.getElementById("old-list");                
                     // Remove the specific item element
@@ -237,16 +238,13 @@ Additionally:
     
 }
 
-function send_data(value) {    
+function send_data(id, active, old) {    
     $.ajax({
         url: '/update_list',
         type: 'POST',
         contentType: 'application/json',
         dataType: 'json',
-        data: JSON.stringify({ 'value': value }),
-        success: function(response) {
-            alert("success")
-        },
+        data: JSON.stringify({ 'id': id, 'active': active, 'old' : old}),
         error: function(error) {
            alert("error");
         }
