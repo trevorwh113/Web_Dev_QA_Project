@@ -9,10 +9,10 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='clients_info.css') }}">
     <!--Link JavaScript + Pass the Flask variables-->
     <script>
-        data = {{ data | tojson }};
+        client = {{ client | tojson }};
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='clients_info.js') }}"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 
@@ -30,15 +30,15 @@
     <toplayer style="display: flex; flex-wrap: wrap;">
         <!-- Client Info -->
         <div class="container">
-            <h1 style="font-size: 28.8px;"> First Name: </h1> <p> {{ first_name }}</p>
-            <h1 style="font-size: 28.8px;"> Last Name: </h1> <p> {{ last_name }}</p>
-            <h1 style="font-size: 28.8px;"> Phone Number: </h1> <p> {{ phone_number }}</p>
-            <h1 style="font-size: 28.8px;"> D.O.B.: </h1> <p> {{ dob }}</p>
+            <h1 style="font-size: 28.8px;"> First Name: </h1> <p> {{ client[1] }}</p>
+            <h1 style="font-size: 28.8px;"> Last Name: </h1> <p> {{ client[2] }}</p>
+            <h1 style="font-size: 28.8px;"> Phone Number: </h1> <p> {{ client[0] }}</p>
+            <h1 style="font-size: 28.8px;"> D.O.B.: </h1> <p> {{ client[3] }}</p>
         </div>
 
         <!--Create Prescription Button-->
         <button style="background-color: #EA8B96; color: #863E46; margin-left: 5px;"
-            onclick="window.location.href='/clients/{{ phone_number }}/create';">
+            onclick="window.location.href='/clients/{{ client[0] }}/create';">
             <span>&#43;</span> <h1 style="font-size: 28.8px; margin: 10px;">Create Prescription</h1>
         </button>
     </toplayer>

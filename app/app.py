@@ -3,7 +3,7 @@ The main control flow of the app. Bridges between the backend link
 and the front end UI (html/css/js).
 """
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import utility
 from client import Client
 
@@ -19,7 +19,7 @@ def home():
 @app.route('/clients', methods=['GET', 'POST'])
 def clients():
     # Backend link to get the data.
-    data = utility.get_all_clients()
+    data = utility.OLD_get_all_clients()
 
     # Filter data set according to user's search parameters.
     if request.method == 'POST':
@@ -33,19 +33,12 @@ def clients():
     return render_template('clients_search.html', data=data)
 
 # Clients Information Page---------------------------------------------
-@app.route('/clients/<phone_number>', methods=['GET', 'POST'])
+@app.route('/clients/<phone_number>', methods=['GET'])
 def clients_info(phone_number):
     # Backend link to get the data about the client.
     client = utility.get_client_by_phone(phone_number)
-    data = [client.active_prescripts, client.old_prescripts] # can remove this next assignment
     # Renders the page.
-    return render_template('clients_info.html', phone_number=phone_number, 
-                                                first_name=client.first_name,
-                                                last_name=client.last_name,
-                                                dob=client.dob,
-                                                ap = client.active_prescripts,
-                                                op = client.old_prescripts,
-                                                data=data)
+    return render_template('clients_info.html', client=client)
 
 # Clients Prescription Creation Page-------------------------------------
 @app.route('/clients/<phone_number>/create', methods=['GET', 'POST'])
@@ -91,6 +84,15 @@ def inventory_info(din):
 def supply():
     return render_template('supply.html', user_input=None)
 
+################################################################
+@app.route('/update_list', methods=['POST'])
+def process():
+    data = request.get_json() # retrieve the data sent from JavaScript
+    # process the data using Python code
+    result = data['value']
+
+    
+    return jsonify(result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)

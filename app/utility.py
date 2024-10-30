@@ -14,7 +14,59 @@ def get_active_prescripts(client):
     [[drug_name, din, next_refill_date, prescribed_by, status], ...]
     [[str,       int, str,              str,           enum - Status],      ...]
     """  
-    return client[5]
+  
+    return client[4]
+
+def update_prescriptions(c_phone, prescript):
+    db = get_database()
+    success = False
+    c = get_client_by_phone(c_phone)
+    active = get_active_prescripts(c)
+    old = get_old_prescripts(c)
+    
+# Check if in active list
+    print(len(active))
+    for i in range(len(active)):
+        p = active[i]
+        if p[1] == prescript[1]:
+            if prescript[4] == 5:
+                active.pop(i)
+                old.append(prescript)
+                success = True
+                break
+            else:
+                active[i]=prescript
+                success = True
+                break
+
+    # Check if in old list
+    if success == False:
+        for i in range(len(old)):
+            p = old[i]
+            if p[1] == prescript[1]:
+                if prescript[4] != 5:
+                    old.pop(i)
+                    active.append(prescript)
+                    success = True
+                    break  
+                else:
+                    old[i]=prescript
+                    success = True
+                    break
+
+
+    clients = db["clients"]
+
+    query_filter = {'phone_number' : c_phone}
+
+    update_operation = { 
+        '$set' : { 
+            'active_pres' : active,
+            'old_pres' : old
+        }
+    }
+
+    clients.update_one(query_filter, update_operation)
 
 def get_old_prescripts(client):
     """
@@ -23,7 +75,7 @@ def get_old_prescripts(client):
     [[drug_name, din, next_refill_date, prescribed_by, status], ...]
     [[str,       int, str,              str,           enum - Status],      ...]
     """  
-    return client[6]
+    return client[5]
 
 ### ***** CLIENT FUNCTIONS ***** ###
 def get_all_clients():
@@ -46,7 +98,7 @@ def get_all_clients():
 
     for item in item_details:
         client = []
-        for value in item.values():
+        for value in list(item.values())[1:]:
             client.append(value)
         client_list.append(client)
 
@@ -63,7 +115,7 @@ def get_client_by_phone(phone_number):
 
     # check if there is a phone number that matches the param in the client list
     for c in clients:
-        if c[1] == phone_number:
+        if c[0] == phone_number:
             return c
     return 0
 
@@ -185,3 +237,28 @@ def valid_int(num):
                 return False
         except:
             return False
+
+
+def OLD_get_all_clients():
+    """
+    Returns a list of all the clients stored in the database. 
+    Return list has format:
+    [[full_name, birth_date, phone_number, active_prescriptions], ...]
+    [[str,       str,        str,          int],                  ...]
+    """
+    client_data = [
+        ["John Doe", "28/09/2004", "(123)-456-7890", 3],
+        ["Jaine Fall", "8/02/2000", "(613)-999-7777", 10],
+        ["Piper Mario", "17/04/1990", "(444)-656-6565", 1],
+        ["Car Binky", "10/10/2020", "(444)-224-2345", 2],
+        ["Helio Ptile", "08/02/2000", "(123)-767-5456", 4],
+        ["Cotton Candy", "22/12/2012", "(232)-456-7890", 0],
+        ["Last One", "14/12/3000", "(777)-666-5555", 13]
+    ]
+
+
+
+    return client_data
+
+
+update_prescriptions("(123)-456-7890", ["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 5])
