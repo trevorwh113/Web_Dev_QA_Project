@@ -74,15 +74,17 @@ def get_client_by_phone(phone_number):
     Returns more detailed information about a client,
     searching the databased using their phone number. 
     """
+    db = get_database()
 
-    #get all clients
-    clients = get_all_clients()
+    clients = db["clients"]
 
-    # check if there is a phone number that matches the param in the client list
-    for c in clients:
-        if c[0] == phone_number:
-            return c
-    return 0
+    client_raw = clients.find_one({"phone_number" : phone_number})
+
+    client=[]
+    for value in list(client_raw.values())[1:]:
+        client.append(value)
+
+    return client
 
 def filter_clients(clients, par):
     """
