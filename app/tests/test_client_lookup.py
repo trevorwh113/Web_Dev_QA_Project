@@ -24,7 +24,7 @@ def test_load_clients_search_page():
     assert b"(444)-224-2345" in response.data, "Did not load a client entry correctly"
     assert b"(123)-767-5456" in response.data, "Did not load a client entry correctly"
     assert b"(232)-456-7890" in response.data, "Did not load a client entry correctly"
-    assert b"(777)-666-55555" in response.data, "Did not load a client entry correctly"
+    assert b"(777)-666-5555" in response.data, "Did not load a client entry correctly"
 
 def test_search_client_by_name():
     """
@@ -42,7 +42,7 @@ def test_search_client_by_name():
     assert b"(444)-224-2345" not in response.data, "Mistakenly loaded a client entry"
     assert b"(123)-767-5456" not in response.data, "Mistakenly loaded a client entry"
     assert b"(232)-456-7890" not in response.data, "Mistakenly loaded a client entry"
-    assert b"(777)-666-55555" not in response.data, "Mistakenly loaded a client entry"
+    assert b"(777)-666-5555" not in response.data, "Mistakenly loaded a client entry"
 
 def test_search_client_by_phone():
     """
@@ -50,7 +50,7 @@ def test_search_client_by_phone():
     entries matching the search parameter - phone_number (POST).
     """
     # Load the search page with a search argument (POST)
-    response = app.test_client().post('/clients', data={"search_par": "(777)-666-55555"})
+    response = app.test_client().post('/clients', data={"search_par": "(777)-666-5555"})
     assert response.status_code == 200
     # Make sure the data has been correctly loaded in.
     # ** May have to change once backend is implemented.
@@ -79,7 +79,7 @@ def test_search_client_invalid():
     assert b"(444)-224-2345" not in response.data, "Mistakenly loaded a client entry"
     assert b"(123)-767-5456" not in response.data, "Mistakenly loaded a client entry"
     assert b"(232)-456-7890" not in response.data, "Mistakenly loaded a client entry"
-    assert b"(777)-666-55555" not in response.data, "Mistakenly loaded a client entry"
+    assert b"(777)-666-5555" not in response.data, "Mistakenly loaded a client entry"
 
 def test_search_client_not_found():
     """
@@ -97,4 +97,4 @@ def test_search_client_not_found():
     assert b"(444)-224-2345" not in response.data, "Mistakenly loaded a client entry"
     assert b"(123)-767-5456" not in response.data, "Mistakenly loaded a client entry"
     assert b"(232)-456-7890" not in response.data, "Mistakenly loaded a client entry"
-    assert b"(777)-666-55555" not in response.data, "Mistakenly loaded a client entry"
+    assert b"(777)-666-5555" not in response.data, "Mistakenly loaded a client entry"
