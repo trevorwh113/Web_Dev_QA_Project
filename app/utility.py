@@ -18,6 +18,7 @@ def get_active_prescripts(client):
     return client[4]
 
 def update_prescriptions(c_phone, actives, olds):
+    """Updates the prescriptions in the database."""
     db = get_database()
 
     clients = db["clients"]
@@ -129,25 +130,21 @@ def get_all_inv():
     [[drug_name, din, usage, dosage, quantity], ...]
     [[str,       int, str,   str,    int],      ...]
     """
-    
-    # Mocks this functionality for now.
-    inv_data = [
-        ["Drug Name", 904954, "Used to reduce inflamation of the sinuses which causes sneezing and runny noses.", 
-        "1 spray daily in each nostril", 10], 
-        
-        ["Paracetamol", 605699, "Used to sooth pain in the funny bone.", 
-        "1 ingested orally daily", 0], 
-       
-        ["Lisdexamfetamine", 565232, "Used to increase focus and quell hunger.", 
-        "1 ingested orally in the morning", 452], 
-       
-        ["Uranium-235", 445544, "Used to inflict a lethal dose of ionizing radiation.", 
-        "Rub over chest for 15 minutes daily", 3], 
-       
-        ["Green Slime", 999999, "Found under office sink, may hydrate skin?", 
-        "Apply topically to dry area", 47]
-    ]
+    # Retrieve the drug inventory from the database.
+    dbname = get_database()    
+    collection_name = dbname["drugs"]
+    inv_raw = collection_name.find()
+    inv_data = []
 
+    # Convert to the list format used elsewhere.
+    for drug in inv_raw:
+        drug_data = [drug["drug_name"],
+                     drug["din"],
+                     drug["usage"],
+                     drug["dosage"],
+                     drug["quantity"]]
+        inv_data.append(drug_data)
+    
     return inv_data
 
 def filter_inv(inv, par):
