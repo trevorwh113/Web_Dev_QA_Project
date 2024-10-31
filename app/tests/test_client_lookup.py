@@ -60,7 +60,7 @@ def test_search_client_by_phone():
     assert b"(444)-224-2345" not in response.data, "Mistakenly loaded a client entry"
     assert b"(123)-767-5456" not in response.data, "Mistakenly loaded a client entry"
     assert b"(232)-456-7890" not in response.data, "Mistakenly loaded a client entry"
-    assert b"(777)-666-55555" in response.data, "Did not load a client entry correctly"
+    assert b"(777)-666-5555" in response.data, "Did not load a client entry correctly"
 
 # Failure cases for /clients route ------------------------------
 def test_search_client_invalid():
