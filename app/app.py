@@ -19,7 +19,7 @@ def home():
 @app.route('/clients', methods=['GET', 'POST'])
 def clients():
     # Backend link to get the data.
-    data = utility.OLD_get_all_clients()
+    data = utility.get_all_clients()
 
     # Filter data set according to user's search parameters.
     if request.method == 'POST':
