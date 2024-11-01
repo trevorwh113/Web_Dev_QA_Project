@@ -193,9 +193,15 @@ def valid_int(num):
         except:
             return False
 
-def valid_drug(drug):
-    inv = get_all_inv()
-    if (drug.upper() in inv):
+def valid_drug(drug_info):
+
+    db = get_database()
+
+    drugs = db["drugs"]
+
+    drug_raw = drugs.find_one({"din" : drug_info[1]})
+
+    if (drug_raw["drug_name"]==drug_info[0] and drug_raw["din"]==drug_info[1] and drug_raw["dosage"]==drug_info[2]):
         return True
     else:
         return False
