@@ -4,6 +4,9 @@ the backend database and those to manipulate data.
 """
 # from enum import Enum
 from client import Client
+from database import get_database
+
+
 
 # MAY USE THIS LATER
 # class Status(Enum):
@@ -14,18 +17,15 @@ from client import Client
 #     NON_ACTIVE = 5
 
 ### ***** PRESCRIPTION FUNCTIONS ***** ###
-def get_active_prescripts(client_phone):
-    ## NOT IN USE FOR A2
+def get_active_prescripts(client):
     """
     Returns a list of all the perscription info stored 
     in the database. Return list has format:
     [[drug_name, din, next_refill_date, prescribed_by, status], ...]
     [[str,       int, str,              str,           enum - Status],      ...]
-    """
-    # Mocks this functionality for now.
-    c = get_client_by_phone(client_phone)
-   
-    return c.active_prescripts
+    """  
+  
+    return client[4]
 
 
 ### ***** CLIENT FUNCTIONS ***** ###
@@ -55,72 +55,17 @@ def get_client_by_phone(phone_number):
     Returns more detailed information about a client,
     searching the databased using their phone number. 
     """
-    # *** MOCKING ACTUAL FUNCTION *** #
+    db = get_database()
 
+    clients = db["clients"]
 
-    # Creating client objects; all will be replaced with a database search
-    client1 = Client("John", "Doe", "(123)-456-7890", "28/09/2004")
-    client1.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client1.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client1.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client1.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client1.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client1.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
+    client_raw = clients.find_one({"phone_number" : phone_number})
 
-    client2 = Client("Jaine", "Fall", "(613)-999-7777", "8/02/2000")
-    client2.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client2.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client2.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client2.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client2.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client2.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-    
-    client3 = Client("Piper", "Mario", "(444)-656-6565", "17/04/1990")
-    client3.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client3.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client3.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client3.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client3.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client3.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
+    client=[]
+    for value in list(client_raw.values())[1:]:
+        client.append(value)
 
-    client4 = Client("Car", "Binky", "(444)-224-2345", "10/10/2020")
-    client4.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client4.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client4.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client4.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client4.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client4.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    client5 = Client("Helio", "Ptile", "(123)-767-5456", "8/02/2000")
-    client5.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client5.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client5.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client5.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client5.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client5.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    client6 = Client("Cotton", "Candy", "(232)-456-7890", "22/12/2012")
-    client6.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client6.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client6.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client6.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client6.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client6.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    client7 = Client("Last", "One", "(777)-666-55555", "14/12/3000")
-    client7.add_new_prescript(["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 1])
-    client7.add_new_prescript(["Green Slime", 654328, "2024-10-19", "Dr. John Smith", 2])
-    client7.add_new_prescript(["Drug Slime", 895632, "2024-10-20", "Dr. John Smith", 3])
-    client7.add_new_prescript(["Blue Slime", 889654, "2024-10-21", "Dr. John Smith", 4])
-    client7.add_new_prescript(["Purple Slime", 552664, "2024-10-22", "Dr. John Smith", 1])
-    client7.add_old_prescript(["old Slime", 552664, "2024-10-22", "Dr. John Smith", 5])
-
-    # Mocks returning the correct entry.
-    list_clients = [client1, client2, client3, client4, client5, client6, client7]
-    for client in list_clients:
-        if client.phone_number == phone_number:
-            return client
-    return 0
+    return client
 
 def filter_clients(clients, par):
     """
@@ -154,8 +99,19 @@ def save_new_prescription(phone_number, pres_data):
     Saves the prescriptiong information to the database
     in the entry for the client with the matchign phone_number.
     """
-    # Mock this for now--do nothing.
-    pass
+    client = get_client_by_phone(phone_number)
+    actives = get_active_prescripts(client)
+    actives.append(pres_data)
+
+    db = get_database()
+
+    clients = db["clients"]
+
+    query_filter = {'phone_number' : phone_number}
+
+    update_operation = { '$set' : { 'active_pres' : actives } }
+
+    clients.update_one(query_filter, update_operation)
 
 ### ***** INVENTORY FUNCTIONS ***** ###
 def get_all_inv():
@@ -165,25 +121,21 @@ def get_all_inv():
     [[drug_name, din, usage, dosage, quantity], ...]
     [[str,       int, str,   str,    int],      ...]
     """
-    
-    # Mocks this functionality for now.
-    inv_data = [
-        ["Drug Name", 904954, "Used to reduce inflamation of the sinuses which causes sneezing and runny noses.", 
-        "1 spray daily in each nostril", 10], 
-        
-        ["Paracetamol", 605699, "Used to sooth pain in the funny bone.", 
-        "1 ingested orally daily", 0], 
-       
-        ["Lisdexamfetamine", 565232, "Used to increase focus and quell hunger.", 
-        "1 ingested orally in the morning", 452], 
-       
-        ["Uranium-235", 445544, "Used to inflict a lethal dose of ionizing radiation.", 
-        "Rub over chest for 15 minutes daily", 3], 
-       
-        ["Green Slime", 999999, "Found under office sink, may hydrate skin?", 
-        "Apply topically to dry area", 47]
-    ]
+    # Retrieve the drug inventory from the database.
+    dbname = get_database()    
+    collection_name = dbname["drugs"]
+    inv_raw = collection_name.find()
+    inv_data = []
 
+    # Convert to the list format used elsewhere.
+    for drug in inv_raw:
+        drug_data = [drug["drug_name"],
+                     drug["din"],
+                     drug["usage"],
+                     drug["dosage"],
+                     drug["quantity"]]
+        inv_data.append(drug_data)
+    
     return inv_data
 
 def filter_inv(inv, par):
@@ -240,3 +192,10 @@ def valid_int(num):
                 return False
         except:
             return False
+
+def valid_drug(drug):
+    inv = get_all_inv()
+    if (drug.upper() in inv):
+        return True
+    else:
+        return False
