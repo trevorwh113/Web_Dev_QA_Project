@@ -37,15 +37,9 @@ def clients():
 def clients_info(phone_number):
     # Backend link to get the data about the client.
     client = utility.get_client_by_phone(phone_number)
-    data = [client.active_prescripts, client.old_prescripts] # can remove this next assignment
+    data = [client[4], client[5]] # can remove this next assignment
     # Renders the page.
-    return render_template('clients_info.html', phone_number=phone_number, 
-                                                first_name=client.first_name,
-                                                last_name=client.last_name,
-                                                dob=client.dob,
-                                                ap = client.active_prescripts,
-                                                op = client.old_prescripts,
-                                                data=data)
+    return render_template('clients_info.html', data=data)
 
 # Clients Prescription Creation Page-------------------------------------
 @app.route('/clients/<phone_number>/create', methods=['GET', 'POST'])
@@ -62,8 +56,8 @@ def clients_create(phone_number):
             # Reloads the client's information page.
             return clients_info(phone_number)
         else:
-            return render_template('clients_create.html', phone_number=phone_number)
-    return render_template('clients_create.html', phone_number=phone_number)
+            return render_template('clients_create.html', phone_number=phone_number, alert=True)
+    return render_template('clients_create.html', phone_number=phone_number, alert=False)
 
   
 # Inventory Search Page----------------------------------------------
