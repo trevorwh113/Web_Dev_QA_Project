@@ -5,7 +5,6 @@ the backend database and those to manipulate data.
 from database import get_database
 
 
-
 ### ***** PRESCRIPTION FUNCTIONS ***** ###
 def get_active_prescripts(client):
     """
@@ -14,10 +13,10 @@ def get_active_prescripts(client):
     [[drug_name, din, next_refill_date, prescribed_by, status], ...]
     [[str,       int, str,              str,           enum - Status],      ...]
     """  
-  
     return client[4]
 
 def update_prescriptions(c_phone, actives, olds):
+    """Updates the prescriptions in the database."""
     db = get_database()
 
     clients = db["clients"]
@@ -42,6 +41,7 @@ def get_old_prescripts(client):
     """  
     return client[5]
 
+
 ### ***** CLIENT FUNCTIONS ***** ###
 def get_all_clients():
     """
@@ -50,24 +50,21 @@ def get_all_clients():
     [[full_name, birth_date, phone_number, active_prescriptions], ...]
     [[str,       str,        str,          int],                  ...]
     """
-    
-    # Get the database using the method we defined in pymongo_test_insert file
-    client_list = []
-    dbname = get_database()
-    
-    # Retrieve a collection named "user_1_items" from database
+    # Retrieve the client inventory from the database.
+    dbname = get_database()    
     collection_name = dbname["clients"]
+    clients_raw = collection_name.find()
+    clients_data = []
 
-    item_details = collection_name.find()
-
-
-    for item in item_details:
-        client = []
-        for value in list(item.values())[1:]:
-            client.append(value)
-        client_list.append(client)
-
-    return client_list
+    # Convert to the list format used elsewhere.
+    for client in clients_raw:
+        c_data = [client["first_name"] + " " + client["last_name"],
+                  client["dob"],
+                  client["phone_number"],
+                  len(client["active_pres"])]
+        clients_data.append(c_data)
+    
+    return clients_data
 
 def get_client_by_phone(phone_number):
     """
@@ -119,6 +116,7 @@ def save_new_prescription(phone_number, pres_data):
     # Mock this for now--do nothing.
     pass
 
+
 ### ***** INVENTORY FUNCTIONS ***** ###
 def get_all_inv():
     """
@@ -127,25 +125,21 @@ def get_all_inv():
     [[drug_name, din, usage, dosage, quantity], ...]
     [[str,       int, str,   str,    int],      ...]
     """
-    
-    # Mocks this functionality for now.
-    inv_data = [
-        ["Drug Name", 904954, "Used to reduce inflamation of the sinuses which causes sneezing and runny noses.", 
-        "1 spray daily in each nostril", 10], 
-        
-        ["Paracetamol", 605699, "Used to sooth pain in the funny bone.", 
-        "1 ingested orally daily", 0], 
-       
-        ["Lisdexamfetamine", 565232, "Used to increase focus and quell hunger.", 
-        "1 ingested orally in the morning", 452], 
-       
-        ["Uranium-235", 445544, "Used to inflict a lethal dose of ionizing radiation.", 
-        "Rub over chest for 15 minutes daily", 3], 
-       
-        ["Green Slime", 999999, "Found under office sink, may hydrate skin?", 
-        "Apply topically to dry area", 47]
-    ]
+    # Retrieve the drug inventory from the database.
+    dbname = get_database()    
+    collection_name = dbname["drugs"]
+    inv_raw = collection_name.find()
+    inv_data = []
 
+    # Convert to the list format used elsewhere.
+    for drug in inv_raw:
+        drug_data = [drug["drug_name"],
+                     drug["din"],
+                     drug["usage"],
+                     drug["dosage"],
+                     drug["quantity"]]
+        inv_data.append(drug_data)
+    
     return inv_data
 
 def filter_inv(inv, par):
@@ -203,27 +197,3 @@ def valid_int(num):
         except:
             return False
 
-
-def OLD_get_all_clients():
-    """
-    Returns a list of all the clients stored in the database. 
-    Return list has format:
-    [[full_name, birth_date, phone_number, active_prescriptions], ...]
-    [[str,       str,        str,          int],                  ...]
-    """
-    client_data = [
-        ["John Doe", "28/09/2004", "(123)-456-7890", 3],
-        ["Jaine Fall", "8/02/2000", "(613)-999-7777", 10],
-        ["Piper Mario", "17/04/1990", "(444)-656-6565", 1],
-        ["Car Binky", "10/10/2020", "(444)-224-2345", 2],
-        ["Helio Ptile", "08/02/2000", "(123)-767-5456", 4],
-        ["Cotton Candy", "22/12/2012", "(232)-456-7890", 0],
-        ["Last One", "14/12/3000", "(777)-666-5555", 13]
-    ]
-
-
-
-    return client_data
-
-
-# update_prescriptions("(123)-456-7890", ["Drug Name", 904954, "2024-10-18", "Dr. John Smith", 5])
