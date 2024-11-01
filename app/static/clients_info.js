@@ -35,7 +35,7 @@ function show_items() {
     */
 
     // For each item in the data for list 1 (active items) passed by Flask...
-    num_items = data[0].length;
+    num_items = client[4].length;
     for (i = 0; i < num_items; i++) {
         // Create an iten
         item = document.createElement("div");
@@ -44,7 +44,7 @@ function show_items() {
         item.style = PRESCRIPTS_STYLE;
 
         // Create the text elements inside the item
-        row = format_active_item(data[0][i]);
+        row = format_active_item(client[4][i]);
         item.appendChild(row);
     
         // Display the item on-screen
@@ -52,7 +52,7 @@ function show_items() {
     }
 
     // For each item in the data for list 2 (old items) passed by Flask...
-    old_items = data[1].length;
+    old_items = client[5].length;
     for (i = 0; i < old_items; i++) {
         // Create an item
         old_item = document.createElement("div");
@@ -61,7 +61,7 @@ function show_items() {
         old_item.style = OLD_PRESCRIPTS_STYLE;
 
         // Create the text elements inside the item
-        row = format_active_item(data[1][i]);
+        row = format_active_item(client[5][i]);
         old_item.appendChild(row);
     
         // Display the item on-screen
@@ -170,15 +170,16 @@ Additionally:
             // if in active list
             if (document.getElementById('item-list').contains(this)){
                 // Update the data[x][4] to reflect the selected value
-                data[0][i][4] = this.value;
+                client[4][i][4] = this.value;
                 
                 // if non-active is chosen
                 if (this.value == "5") {
 
                     // switch it to the other data list
-                    data[1].push(data[0][i])
-                    data[0].splice(i, 1);
+                    client[5].push(client[4][i])
+                    client[4].splice(i, 1);
 
+                    send_data(client[0], client[4], client[5])
                     
                     // Remove the corresponding item from the DOM
                     itemList = document.getElementById("item-list");                
@@ -199,18 +200,19 @@ Additionally:
             
             // if in old list
             } else if ((document.getElementById('old-list').contains(this))){
-                idx = i - data[0].length;
+                idx = i - client[4].length;
                 // Update the data[x][4] to reflect the selected value
-                data[1][idx][4] = this.value;
+                client[5][idx][4] = this.value;
                 
                 // if anything other than non-active is chosen
                 if (this.value !== "5") {
 
                     // switch it to the other data list
-                    data[0].push(data[1][idx])
-                    data[1].splice(idx, 1);
+                    client[4].push(client[5][idx])
+                    client[5].splice(idx, 1);
 
-                    
+                    send_data(client[0], client[4], client[5])
+
                     // Remove the corresponding item from the DOM
                     itemList = document.getElementById("old-list");                
                     // Remove the specific item element
@@ -230,10 +232,23 @@ Additionally:
 
             }
         });
-            
+        
             
     }
     
+}
+
+function send_data(id, active, old) {    
+    $.ajax({
+        url: '/update_list',
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({ 'id': id, 'active': active, 'old' : old}),
+        error: function(error) {
+           alert("error");
+        }
+    });
 }
 
 
