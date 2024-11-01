@@ -80,9 +80,7 @@ def get_client_by_phone(phone_number):
 
     client_raw = clients.find_one({"phone_number" : phone_number})
 
-    client=[]
-    for value in list(client_raw.values())[1:]:
-        client.append(value)
+    client=list(client_raw.values())[1:]
 
     return client
 
