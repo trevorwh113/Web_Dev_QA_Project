@@ -3,7 +3,7 @@ The main control flow of the app. Bridges between the backend link
 and the front end UI (html/css/js).
 """
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import utility
 from client import Client
 
@@ -37,9 +37,8 @@ def clients():
 def clients_info(phone_number):
     # Backend link to get the data about the client.
     client = utility.get_client_by_phone(phone_number)
-    data = [client[4], client[5]] # can remove this next assignment
     # Renders the page.
-    return render_template('clients_info.html', data=data)
+    return render_template('clients_info.html', client=client)
 
 # Clients Prescription Creation Page-------------------------------------
 @app.route('/clients/<phone_number>/create', methods=['GET', 'POST'])
@@ -88,6 +87,17 @@ def inventory_info(din):
 def supply():
     return render_template('supply.html', user_input=None)
 
+################################################################
+@app.route('/update_list', methods=['POST'])
+def update_lists():
+    data = request.get_json() # retrieve the data sent from JavaScript
+    # process the data using Python code
+    phone = data['id']
+    actives = data['active']
+    olds = data['old']
+
+    utility.update_prescriptions(phone, actives, olds)
+    return jsonify(result=phone)
 
 if __name__ == '__main__':
     app.run(debug=True)

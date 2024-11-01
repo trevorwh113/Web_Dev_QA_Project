@@ -65,6 +65,8 @@ test_view_prescriptions.py
 
 test_prescription_creation.py
 
+test_change_status.py
+
 
 ## Notes
 Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.

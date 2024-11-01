@@ -2,19 +2,9 @@
 Provides utility functions, such as those to access
 the backend database and those to manipulate data.
 """
-# from enum import Enum
-from client import Client
+
 from database import get_database
 
-
-
-# MAY USE THIS LATER
-# class Status(Enum):
-#     READY = 1
-#     NEEDS_FILLING = 2
-#     NO_RENEWAL = 3
-#     RENEWAL_AVAIL = 4
-#     NON_ACTIVE = 5
 
 ### ***** PRESCRIPTION FUNCTIONS ***** ###
 def get_active_prescripts(client):
@@ -24,8 +14,34 @@ def get_active_prescripts(client):
     [[drug_name, din, next_refill_date, prescribed_by, status], ...]
     [[str,       int, str,              str,           enum - Status],      ...]
     """  
-  
+
     return client[4]
+
+def update_prescriptions(c_phone, actives, olds):
+    """Updates the prescriptions in the database."""
+    db = get_database()
+
+    clients = db["clients"]
+
+    query_filter = {'phone_number' : c_phone}
+
+    update_operation = { 
+        '$set' : { 
+            'active_pres' : actives,
+            'old_pres' : olds
+        }
+    }
+
+    clients.update_one(query_filter, update_operation)
+
+def get_old_prescripts(client):
+    """
+    Returns a list of all the old perscription info stored 
+    in the database. Return list has format:
+    [[drug_name, din, next_refill_date, prescribed_by, status], ...]
+    [[str,       int, str,              str,           enum - Status],      ...]
+    """  
+    return client[5]
 
 
 ### ***** CLIENT FUNCTIONS ***** ###
@@ -36,19 +52,21 @@ def get_all_clients():
     [[full_name, birth_date, phone_number, active_prescriptions], ...]
     [[str,       str,        str,          int],                  ...]
     """
-    
-    # Mocks this functionality for now. Does not use Client class.
-    client_data = [
-        ["John Doe", "28/09/2004", "(123)-456-7890", 3], 
-        ["Jaine Fall", "8/02/2000", "(613)-999-7777", 10], 
-        ["Piper Mario", "17/04/1990", "(444)-656-6565", 1], 
-        ["Car Binky", "10/10/2020", "(444)-224-2345", 2], 
-        ["Helio Ptile", "8/02/2000", "(123)-767-5456", 4], 
-        ["Cotton Candy", "22/12/2012", "(232)-456-7890", 0], 
-        ["Last One", "14/12/3000", "(777)-666-55555", 13]
-    ]
+    # Retrieve the client inventory from the database.
+    dbname = get_database()    
+    collection_name = dbname["clients"]
+    clients_raw = collection_name.find()
+    clients_data = []
 
-    return client_data
+    # Convert to the list format used elsewhere.
+    for client in clients_raw:
+        c_data = [client["first_name"] + " " + client["last_name"],
+                  client["dob"],
+                  client["phone_number"],
+                  len(client["active_pres"])]
+        clients_data.append(c_data)
+    
+    return clients_data
 
 def get_client_by_phone(phone_number):
     """
@@ -61,9 +79,7 @@ def get_client_by_phone(phone_number):
 
     client_raw = clients.find_one({"phone_number" : phone_number})
 
-    client=[]
-    for value in list(client_raw.values())[1:]:
-        client.append(value)
+    client=list(client_raw.values())[1:]
 
     return client
 
@@ -112,6 +128,7 @@ def save_new_prescription(phone_number, pres_data):
     update_operation = { '$set' : { 'active_pres' : actives } }
 
     clients.update_one(query_filter, update_operation)
+
 
 ### ***** INVENTORY FUNCTIONS ***** ###
 def get_all_inv():
@@ -205,3 +222,4 @@ def valid_drug(drug_info):
         return True
     else:
         return False
+

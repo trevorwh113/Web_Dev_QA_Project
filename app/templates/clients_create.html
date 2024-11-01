@@ -6,8 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS style sheet for home page-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='clients_create.css') }}">
     <script>
         if ({{ alert }} == true) {
             alert("Please enter valid data");
@@ -19,27 +18,36 @@
 <body>
 
     <!--Create Header-->
-    <header>
+    <header style="background-color: #8389CCA1;">
         <h1>Prescription Creation</h1>
     </header>
 
    <!--Main Body-->
-   <main>
+    <main>
     <form id="myForm" method="POST">
-        <label for="dname">Drug Name:</label><br>
-        <input type="text" id="dname" name="dname" value=""><br>
-        <label for="DIN">DIN:</label><br>
-        <input type="text" id="DIN" name="DIN" value=""><br>
-        <label for="dosage">Dosage:</label><br>
-        <input type="text" id="dosage" name="dosage" value=""><br>
-        <label for="preBy">Prescribed By:</label><br>
-        <input type="text" id="preBy" name="preBy" value=""><br>
-        <label for="interval">Refill Interval:</label><br>
-        <input type="text" id="interval" name="interval" value=""><br>
-        <button style="background-color: #EA8B96; color: #863E46;" type="submit" class="btn btn-primary">Submit</button>
+        <div class="row">
+            <div class="col reg">
+                <h3><label for="dname">Drug Name:</label><br></h3>
+                <input type="text" id="dname" name="dname" value=""><br>
+                <h3><label for="DIN">DIN:</label><br></h3>
+                <input type="text" id="DIN" name="DIN" value=""><br>
+                <h3><label for="dosage">Dosage:</label><br></h3>
+                <input type="text" id="dosage" name="dosage" value=""><br>
+            </div>
+            <div class="col reg">
+                <h3><label for="preBy">Prescribed By:</label><br></h3>
+                <input type="text" id="preBy" name="preBy" value=""><br>
+                <h3><label for="interval">Refill Interval:</label><br></h3>
+                <input type="text" id="interval" name="interval" value=""><br>
+                <!--Confirm Button-->
+                <button class="submit" style="background-color: #4FC08A; color: #194731;" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
     </form>
-    
-    <button style="background-color: #EA8B96; color: #863E46;" type="cancel" onclick="window.location.href='/clients/{{ phone_number }}';">Cancel</button>
+    <!--Cancel Button-->
+    <div class="row">
+        <button class="cancel" style="background-color: #8389CCA1; color: #2E2B44;" type="cancel" onclick="window.location.href='/clients/{{ phone_number }}';">Cancel</button>
+    </div>
 
     </main>
 
