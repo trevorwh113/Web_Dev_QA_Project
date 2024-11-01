@@ -8,7 +8,8 @@
     <!--CSS style sheet for home page-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='clients_create.css') }}">
     <script>
-        if ({{ alert }} == true) {
+        success = {{ alert | tojson }};
+        if (success == true) {
             alert("Please enter valid data");
         }
     </script>
@@ -27,18 +28,14 @@
     <form id="myForm" method="POST">
         <div class="row">
             <div class="col reg">
-                <h3><label for="dname">Drug Name:</label><br></h3>
-                <input type="text" id="dname" name="dname" value=""><br>
                 <h3><label for="DIN">DIN:</label><br></h3>
                 <input type="text" id="DIN" name="DIN" value=""><br>
-                <h3><label for="dosage">Dosage:</label><br></h3>
-                <input type="text" id="dosage" name="dosage" value=""><br>
+                <h3><label for="interval">Refill Date:</label><br></h3>
+                <input type="text" id="interval" name="interval" value=""><br>
             </div>
             <div class="col reg">
                 <h3><label for="preBy">Prescribed By:</label><br></h3>
                 <input type="text" id="preBy" name="preBy" value=""><br>
-                <h3><label for="interval">Refill Interval:</label><br></h3>
-                <input type="text" id="interval" name="interval" value=""><br>
                 <!--Confirm Button-->
                 <button class="submit" style="background-color: #4FC08A; color: #194731;" type="submit" class="btn btn-primary">Submit</button>
             </div>

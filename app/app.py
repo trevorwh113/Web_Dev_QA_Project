@@ -45,13 +45,12 @@ def clients_info(phone_number):
 def clients_create(phone_number):
     if request.method == 'POST':
         # Backend link to save the data....
-        user_input = [request.form['dname'],
-                      request.form['DIN'],
-                      request.form['dosage'],
+        user_input = [int(request.form['DIN']),
                       request.form['preBy'],
                       request.form['interval']]
-        if(utility.valid_drug(user_input)):          
-            utility.save_new_prescription(phone_number, user_input)
+        entry = utility.valid_drug(user_input)
+        if(entry != None):          
+            utility.save_new_prescription(phone_number, user_input, entry)
             # Reloads the client's information page.
             return clients_info(phone_number)
         else:

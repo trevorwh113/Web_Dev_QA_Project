@@ -110,14 +110,18 @@ def filter_clients(clients, par):
     
     return new_clients
 
-def save_new_prescription(phone_number, pres_data):
+def save_new_prescription(phone_number, pres_data, drug_data):
     """
     Saves the prescriptiong information to the database
     in the entry for the client with the matchign phone_number.
     """
     client = get_client_by_phone(phone_number)
     actives = get_active_prescripts(client)
-    actives.append(pres_data)
+    actives.append([drug_data["drug_name"],
+                    pres_data[0],
+                    pres_data[2],
+                    pres_data[1],
+                    "2"])
 
     db = get_database()
 
@@ -216,10 +220,10 @@ def valid_drug(drug_info):
 
     drugs = db["drugs"]
 
-    drug_raw = drugs.find_one({"din" : drug_info[1]})
-
-    if (drug_raw["drug_name"]==drug_info[0] and drug_raw["din"]==drug_info[1] and drug_raw["dosage"]==drug_info[2]):
-        return True
+    drug_raw = drugs.find_one({"din" : drug_info[0]})
+    
+    if drug_raw == None:
+        return None
     else:
-        return False
+        return drug_raw
 
