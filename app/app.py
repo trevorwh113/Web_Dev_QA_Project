@@ -50,10 +50,13 @@ def clients_create(phone_number):
                       request.form['dosage'],
                       request.form['preBy'],
                       request.form['interval']]
-        utility.save_new_prescription(phone_number, user_input)
-        # Reloads the client's information page.
-        return clients_info(phone_number)
-    return render_template('clients_create.html', phone_number=phone_number)
+        if(utility.valid_drug(user_input)):          
+            utility.save_new_prescription(phone_number, user_input)
+            # Reloads the client's information page.
+            return clients_info(phone_number)
+        else:
+            return render_template('clients_create.html', phone_number=phone_number, alert=True)
+    return render_template('clients_create.html', phone_number=phone_number, alert=False)
 
   
 # Inventory Search Page----------------------------------------------

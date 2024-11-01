@@ -2,6 +2,7 @@
 Provides utility functions, such as those to access
 the backend database and those to manipulate data.
 """
+
 from database import get_database
 
 
@@ -13,6 +14,7 @@ def get_active_prescripts(client):
     [[drug_name, din, next_refill_date, prescribed_by, status], ...]
     [[str,       int, str,              str,           enum - Status],      ...]
     """  
+
     return client[4]
 
 def update_prescriptions(c_phone, actives, olds):
@@ -113,8 +115,19 @@ def save_new_prescription(phone_number, pres_data):
     Saves the prescriptiong information to the database
     in the entry for the client with the matchign phone_number.
     """
-    # Mock this for now--do nothing.
-    pass
+    client = get_client_by_phone(phone_number)
+    actives = get_active_prescripts(client)
+    actives.append(pres_data)
+
+    db = get_database()
+
+    clients = db["clients"]
+
+    query_filter = {'phone_number' : phone_number}
+
+    update_operation = { '$set' : { 'active_pres' : actives } }
+
+    clients.update_one(query_filter, update_operation)
 
 
 ### ***** INVENTORY FUNCTIONS ***** ###
@@ -196,4 +209,17 @@ def valid_int(num):
                 return False
         except:
             return False
+
+def valid_drug(drug_info):
+
+    db = get_database()
+
+    drugs = db["drugs"]
+
+    drug_raw = drugs.find_one({"din" : drug_info[1]})
+
+    if (drug_raw["drug_name"]==drug_info[0] and drug_raw["din"]==drug_info[1] and drug_raw["dosage"]==drug_info[2]):
+        return True
+    else:
+        return False
 
