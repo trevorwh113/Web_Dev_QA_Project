@@ -15,7 +15,6 @@ def test_load_prescription_page():
     assert response.status_code == 200
     assert b"Active Perscriptions" in response.data, "Did not load clients prescription page correctly"
     # Make sure the data has been correctly loaded in.
-    # ** May have to change once backend is implemented.
     assert b"Drug Name" in response.data, "Did not load page correctly"
     assert b"Green Slime" in response.data, "Did not load page correctly"
     assert b"Drug Slime" in response.data, "Did not load page correctly"

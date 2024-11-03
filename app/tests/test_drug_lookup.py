@@ -17,7 +17,6 @@ def test_load_inventory_search_page():
     assert response.status_code == 200
     assert b"Search Inventory" in response.data, "Did not load inventory page correctly"
     # Make sure the data has been correctly loaded in.
-    # ** May have to change once backend is implemented.
     assert b"904954" in response.data, "Did not load a drug entry correctly"
     assert b"605699" in response.data, "Did not load a drug entry correctly"
     assert b"565232" in response.data, "Did not load a drug entry correctly"
@@ -33,7 +32,6 @@ def test_search_inventory_by_name():
     response = app.test_client().post('/inventory', data={"search_par": "am"})
     assert response.status_code == 200
     # Make sure the data has been correctly loaded in.
-    # ** May have to change once backend is implemented.
     assert b"904954" in response.data, "Did not load a drug entry correctly"
     assert b"605699" in response.data, "Did not load a drug entry correctly"
     assert b"565232" in response.data, "Did not load a drug entry correctly"
@@ -49,7 +47,6 @@ def test_search_inventory_by_din():
     response = app.test_client().post('/inventory', data={"search_par": 445544})
     assert response.status_code == 200
     # Make sure the data has been correctly loaded in.
-    # ** May have to change once backend is implemented.
     assert b"904954" not in response.data, "Mistakenly loaded a drug entry"
     assert b"605699" not in response.data, "Mistakenly loaded a drug entry"
     assert b"565232" not in response.data, "Mistakenly loaded a drug entry"
@@ -66,7 +63,6 @@ def test_search_inventory_invalid():
     response = app.test_client().post('/inventory', data={"search_par": ""})
     assert response.status_code == 200
     # Make sure the data has been correctly loaded in.
-    # ** May have to change once backend is implemented.
     assert b"904954" not in response.data, "Mistakenly loaded a drug entry"
     assert b"605699" not in response.data, "Mistakenly loaded a drug entry"
     assert b"565232" not in response.data, "Mistakenly loaded a drug entry"
@@ -82,7 +78,6 @@ def test_search_inventory_not_found():
     response = app.test_client().post('/inventory', data={"search_par": 111111})
     assert response.status_code == 200
     # Make sure the data has been correctly loaded in.
-    # ** May have to change once backend is implemented.
     assert b"904954" not in response.data, "Mistakenly loaded a drug entry"
     assert b"605699" not in response.data, "Mistakenly loaded a drug entry"
     assert b"565232" not in response.data, "Mistakenly loaded a drug entry"
