@@ -28,7 +28,7 @@ def test_submit_with_valid_data():
     Success case: Tests that a submission redirects to the client page when a
     valid DIN is entered. Also makes sure database is updated accordingly (POST).
     Note that this test should result in a client "JOHN DOE" getting a new
-    prescription. This client exists solely for testing purposes.
+    prescription.
     """
     # Create a distinct new prescription.
     target = f"Dr. {random.randint(0,1000000)}"
