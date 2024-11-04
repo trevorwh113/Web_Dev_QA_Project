@@ -2,6 +2,7 @@
 Tests the ability to save prescriptions in utility.py.
 """
 import utility
+import random
 import pytest
 from database import get_database
 
@@ -13,7 +14,8 @@ from database import get_database
 
 def test_save_new_prescription0():
     phone_num = '(444)-224-2345'
-    user_input = [445544, "Dr. Erin Meger", "12/12/1212"]
+    rando = str(random.randint(1, 999999))
+    user_input = [445544, "Dr."+rando, "12/12/1212"]
     utility.save_new_prescription(phone_num, user_input, utility.valid_drug(user_input[0]))
 
     dbname = get_database()    
