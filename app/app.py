@@ -47,7 +47,7 @@ def clients_create(phone_number):
         # Backend link to save the data....
         user_input = [int(request.form['DIN']),
                       request.form['preBy'],
-                      request.form['interval']]
+                      request.form['refill']]
         entry = utility.valid_drug(user_input[0])
         if(entry != None):          
             utility.save_new_prescription(phone_number, user_input, entry)
