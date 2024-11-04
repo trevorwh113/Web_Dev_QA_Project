@@ -1,6 +1,6 @@
 """
 Success and failure unit test cases for the get_client_by_phone()
-backend-link function prodived in uility.py.
+backend-link function provided in uility.py.
 """
 import utility, pytest
 
