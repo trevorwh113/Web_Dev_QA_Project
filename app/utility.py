@@ -214,13 +214,13 @@ def valid_int(num):
         except:
             return False
 
-def valid_drug(drug_info):
+def valid_drug(din):
 
     db = get_database()
 
     drugs = db["drugs"]
 
-    drug_raw = drugs.find_one({"din" : drug_info[0]})
+    drug_raw = drugs.find_one({"din" : din})
     
     if drug_raw == None:
         return None
