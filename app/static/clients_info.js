@@ -11,7 +11,7 @@ PRESCRIPTS_STYLE = "border-left: 10px solid #FF7F7F;\
                 box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2);\
                 height: 74px;\
                 margin: 20px 0px;\
-                padding-left: 10px; \
+                padding-left: 5px; \
                 display: flex-inline;" ;
 
 // Inactive Prescription Style
@@ -82,7 +82,7 @@ function format_active_item(data) {
 
     // Column 0 - Drug Name
     col = document.createElement("div");
-    col.className = "col b-small";
+    col.className = "col b-first";
     write_text(col, "Drug Name:", bold=true, newline=true);
     write_text(col, data[0]);
     row.appendChild(col);
@@ -110,7 +110,7 @@ function format_active_item(data) {
    
     // Column 4 - Status
     // Generates a new select element with the options from the array
-    arr = ["Ready", "Needs Filling", "Not Ready for Renewal", "Renewal Available", "Non-Active"]
+    arr = ["Ready", "Needs Filling", "Renewal on Hold", "Renewal Available", "Non-Active"]
     col = document.createElement("select");
     col.className = "b-large";
     arr.forEach(function(optionText, index) {

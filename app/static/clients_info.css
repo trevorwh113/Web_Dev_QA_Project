@@ -167,14 +167,20 @@ span {
     width: 25%;
 }
 .b-small {
-    width: 15%;
+    width: 10%;
+}
+.b-first {
+    width: 20%;
+    padding-right: 10px;
+
 }
 .b-reg {
     width: 20%;
 }
 .b-large {
     margin-top: 20px;
-    width: 30%;
+    margin-left: 10px;
+    width: 25%;
 }
 .row:after {
     content: "";
