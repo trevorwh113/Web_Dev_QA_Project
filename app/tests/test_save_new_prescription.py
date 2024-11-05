@@ -1,5 +1,5 @@
 """
-Tests the ability to save prescriptions in utility.py.
+Unit tests the ability to save prescriptions in utility.py.
 """
 import utility
 import random
