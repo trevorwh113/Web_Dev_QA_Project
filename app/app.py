@@ -5,7 +5,6 @@ and the front end UI (html/css/js).
 
 from flask import Flask, render_template, request, jsonify
 import utility
-from client import Client
 
 app = Flask(__name__)
 
