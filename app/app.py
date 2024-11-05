@@ -59,11 +59,9 @@ def clients_create(phone_number):
             # Throw alert if drug does not exist in the database.
             else:
                 return render_template('clients_create.html', phone_number=phone_number, alert=True)
-        
         # Throw alert if DIN is not an integer.
         except:
             return render_template('clients_create.html', phone_number=phone_number, alert=True)
-    
     # Renders the page.
     return render_template('clients_create.html', phone_number=phone_number, alert=False)
 
