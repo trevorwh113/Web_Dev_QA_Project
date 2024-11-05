@@ -1,5 +1,5 @@
 """
-This program implements a medecine management website. Users can
+This program implements a medicine management website. Users can
 search a database of 20 drugs, and another of 20 clients. They 
 can also view a client's prescriptions, modify their status, and
 create new prescriptiosn. 
