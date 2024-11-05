@@ -36,14 +36,12 @@ def test_get_all_clients(types):
     # Check the inside list.
     entry = data[0]
     assert type(entry) == types["LST"], "Entry values should be lists"
-    assert len(entry) == 6, "Entry values should have 6 elements"
+    assert len(entry) == 4, "Entry values should have 4 elements"
     # Check the values ofthe inside list.
-    assert type(entry[0]) == types["STR"], "full_name should be a string"
     assert type(entry[0]) == types["STR"], "full_name should be a string"
     assert type(entry[1]) == types["STR"], "birth_date should be a string"
     assert type(entry[2]) == types["STR"], "phone_number should be a string"
-    assert type(entry[3]) == types["LIST"], "active_prescriptions should be an integer"
-    assert type(entry[3]) == types["LIST"], "active_prescriptions should be an integer"
+    assert type(entry[3]) == types["INT"], "active_prescriptions should be an integer"
 
 # Success cases for filter_clients() ------------------------------
 def test_filter_clients_1(clients):

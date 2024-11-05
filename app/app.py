@@ -44,17 +44,25 @@ def clients_info(phone_number):
 @app.route('/clients/<phone_number>/create', methods=['GET', 'POST'])
 def clients_create(phone_number):
     if request.method == 'POST':
-        # Backend link to save the data....
-        user_input = [int(request.form['DIN']),
-                      request.form['preBy'],
-                      request.form['refill']]
-        entry = utility.valid_drug(user_input[0])
-        if(entry != None):          
-            utility.save_new_prescription(phone_number, user_input, entry)
-            # Reloads the client's information page.
-            return clients_info(phone_number)
-        else:
+        try:
+            # Validate input
+            user_input = [int(request.form['DIN']),
+                        request.form['preBy'],
+                        request.form['interval']]
+            entry = utility.valid_drug(user_input)
+            
+            # Save to database and redirect.
+            if(entry != None):          
+                utility.save_new_prescription(phone_number, user_input, entry)
+                return clients_info(phone_number)
+            
+            # Throw alert if drug does not exist in the database.
+            else:
+                return render_template('clients_create.html', phone_number=phone_number, alert=True)
+        # Throw alert if DIN is not an integer.
+        except:
             return render_template('clients_create.html', phone_number=phone_number, alert=True)
+    # Renders the page.
     return render_template('clients_create.html', phone_number=phone_number, alert=False)
 
   

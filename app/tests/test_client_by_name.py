@@ -1,6 +1,6 @@
 """
 Success and failure unit test cases for the get_client_by_phone()
-backend-link function prodived in uility.py.
+backend-link function provided in uility.py.
 """
 import utility, pytest
 
@@ -17,7 +17,7 @@ def test_existing_client_1():
     assert c[2] == "DOE"
     assert c[3] == "28/09/2004"
     
-def test__existing_client_2():
+def test_existing_client_2():
     """
     GIVEN a client phone number
     WHEN the string is passed through to the function

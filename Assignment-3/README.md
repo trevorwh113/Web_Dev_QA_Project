@@ -56,6 +56,8 @@ test_drug_filter.py
 
 test_valid_input.py
 
+test_get_set_prescriptions.py
+
 ### Functional Tests (related to test cases from A1)
 test_client_lookup.py
 
@@ -64,8 +66,6 @@ test_drug_lookup.py
 test_view_prescriptions.py
 
 test_prescription_creation.py
-
-test_change_status.py
 
 
 ## Notes
