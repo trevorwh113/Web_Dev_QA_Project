@@ -31,7 +31,7 @@ def test_submit_with_valid_data():
     """
     # Create a distinct new prescription.
     target = f"Dr. {random.randint(0,1000000)}"
-    data = {"DIN": "445544", "preBy": target, "interval": "01/01/2025"}
+    data = {"DIN": "445544", "preBy": target, "refill": "01/01/2025"}
 
     # Submit the create page with arguments (POST)
     response = app.test_client().post('/clients/(123)-456-7890/create', data=data)
@@ -47,7 +47,7 @@ def test_submit_with_invalid_din():
     database.
     """
     # Create an invalid test prescription.
-    data = {"DIN": "", "preBy": "NOT A DOCTOR", "interval": "01/01/2025"}
+    data = {"DIN": "", "preBy": "NOT A DOCTOR", "refill": "01/01/2025"}
 
     # Submit the create page with arguments (POST)
     response = app.test_client().post('/clients/(123)-456-7890/create', data=data)
@@ -61,7 +61,7 @@ def test_submit_with_inexistant_din():
     check the database.
     """
     # Create a test prescription with inexistent din.
-    data = {"DIN": "000000000", "preBy": "NOT A DRUG", "interval": "01/01/2025"}
+    data = {"DIN": "000000000", "preBy": "NOT A DRUG", "refill": "01/01/2025"}
 
     # Submit the create page with arguments (POST)
     response = app.test_client().post('/clients/(123)-456-7890/create', data=data)

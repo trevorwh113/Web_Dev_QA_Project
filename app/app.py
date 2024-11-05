@@ -48,11 +48,11 @@ def clients_create(phone_number):
             # Validate input
             user_input = [int(request.form['DIN']),
                         request.form['preBy'],
-                        request.form['interval']]
-            entry = utility.valid_drug(user_input)
+                        request.form['refill']]
+            entry = utility.valid_drug(user_input[0])
             
             # Save to database and redirect.
-            if(entry != None):          
+            if(entry != None):
                 utility.save_new_prescription(phone_number, user_input, entry)
                 return clients_info(phone_number)
             
