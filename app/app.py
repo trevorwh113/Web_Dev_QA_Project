@@ -1,6 +1,16 @@
 """
-The main control flow of the app. Bridges between the backend link
-and the front end UI (html/css/js).
+This program implements a medecine management website. Users can
+search a database of 20 drugs, and another of 20 clients. They 
+can also view a client's prescriptions, modify their status, and
+create new prescriptiosn. 
+
+This file provides the main control flow of the app. It bridges between 
+the backend link to the database (implement using MongoDB) and the 
+front-end UI (a combination of html/css/js).
+
+To run the app, simply run 'python app.py' from the app/ directory.
+For more detailed information about setup and running the project,
+please see the README file under Assignment-3.
 """
 
 from flask import Flask, render_template, request, jsonify
