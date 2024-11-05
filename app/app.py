@@ -5,12 +5,13 @@ can also view a client's prescriptions, modify their status, and
 create new prescriptiosn. 
 
 This file provides the main control flow of the app. It bridges between 
-the backend link to the database (implement using MongoDB) and the 
-front-end UI (a combination of html/css/js).
+the backend link to the database (built with MongoDB) and the front-end UI
+(a combination of html/css/js).
 
-To run the app, simply run 'python app.py' from the app/ directory.
-For more detailed information about setup and running the project,
-please see the README file under Assignment-3.
+To run the app, if the project is setup correctly, simply execute 
+'python app.py' in the app/ directory. For more detailed information 
+about setup and running the app, please see the README file under the 
+Assignment-3/ directory.
 """
 
 from flask import Flask, render_template, request, jsonify
