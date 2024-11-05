@@ -14,6 +14,7 @@
 | Updated get_all_clients() to have database functionality |
 | Added mock data in the database to fill it out |
 | Created or updated tests for various functions including saving a new prescription to the database |
+| Created test screenshots for submission |
 
 | Sophia |
 | -----  |

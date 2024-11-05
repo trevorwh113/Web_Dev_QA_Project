@@ -48,8 +48,6 @@
 ### Unit Tests
 test_client_by_name.py
 
-test_client_class.py
-
 test_client_filter.py
 
 test_drug_filter.py
@@ -57,6 +55,10 @@ test_drug_filter.py
 test_valid_input.py
 
 test_get_set_prescriptions.py
+
+test_valid_drug.py
+
+test_save_prescription.py
 
 ### Functional Tests (related to test cases from A1)
 test_client_lookup.py
@@ -71,4 +73,4 @@ test_prescription_creation.py
 ## Notes
 Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.
 
-As of now, we have no backend functionality and all data has been mock-implemented to provide a full frontend look.
+Backend functionality is now implemented and as such, there may be longer load times for the pages as it is fetching that data from the cloud.
