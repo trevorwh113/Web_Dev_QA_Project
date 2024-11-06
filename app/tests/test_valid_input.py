@@ -7,24 +7,21 @@ import utility
 
 # Unit tests for validate_string() // Casts to non-empty string
 def test_valstring0():
-    assert utility.valid_string() == False 
-
-def test_valstring0():
     assert utility.valid_string("") == False 
 
-def test_valstring2():
+def test_valstring1():
     assert utility.valid_string("   ") == False 
 
-def test_valstring3():
+def test_valstring2():
     assert utility.valid_string("hawk tuah") == True
 
-def test_valstring4():
+def test_valstring3():
     assert utility.valid_string(0) == True
 
-def test_valstring5():
+def test_valstring4():
     assert utility.valid_string(-1.5) == True
 
-def test_valstring6():
+def test_valstring5():
     assert utility.valid_string([]) == True
 
 
