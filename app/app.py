@@ -33,10 +33,7 @@ def clients():
 
     # Filter data set according to user's search parameters.
     if request.method == 'POST':
-        try:
-            par = request.form['search_par']
-        except:
-            par = None
+        par = request.form['search_par']
         data = utility.filter_clients(data, par)
 
     # Renders the page.
@@ -84,10 +81,7 @@ def inventory_search():
 
     # Filter data set according to user's search parameters.
     if request.method == 'POST':
-        try:
-            par = request.form['search_par']
-        except:
-            par = None
+        par = request.form['search_par']
         data = utility.filter_inv(data, par)
 
     # Renders the page.
