@@ -1,0 +1,18 @@
+To run code coverage:
+---------------------
+Make sure to have updated your venv using the requirements.txt file
+	Run:	coverage run -m pytest
+
+To see the coverage results:
+----------------------------
+In terminal:
+	Run:	coverage report
+In browser:
+	Run: 	coverage html
+	Open: 	./htmlcov/index.html
+
+To see the provided reports:
+----------------------------
+Open the following files in your browser:
+	Open: 	Assignment-4/initial_coverage/index.hmtl
+	Open: 	Assignment-4/<TBD>/index.html
