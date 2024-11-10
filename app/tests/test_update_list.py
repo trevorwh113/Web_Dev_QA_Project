@@ -1,9 +1,9 @@
-from app import app
-import pytest, utility
 """
 This file contains a unit test for the update_list feature within the client info page
 that switches prescription lists.
 """
+from app import app
+import pytest, utility
 
 def test_update_list():
 
