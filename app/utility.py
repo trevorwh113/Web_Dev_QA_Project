@@ -190,29 +190,29 @@ def filter_inv(inv, par):
 
 ### ***** MISC FUNCTIONS ***** ###
 def valid_string(string):
-    """Checks that the input can be cast to a non-empty string."""
-    if string == None:
-        return False
+    """
+    Checks that the input can be cast to a non-empty string. 
+    Assumes input 'string' is not None.
+    """
+    string = str(string).strip()
+    if len(string) > 0:
+        return True
     else:
-        string = str(string).strip()
-        if len(string) > 0:
+        return False
+
+def valid_int(num):
+    """
+    Checks that the input can be cast to a non-negative int.
+    Assumes input 'num' is not None.
+    """
+    try:
+        num = int(num)
+        if num >= 0:
             return True
         else:
             return False
-
-def valid_int(num):
-    """Checks that the input can be cast to a non-negative int."""
-    if num == None:
+    except:
         return False
-    else:
-        try:
-            num = int(num)
-            if num >= 0:
-                return True
-            else:
-                return False
-        except:
-            return False
 
 def valid_drug(din):
 
