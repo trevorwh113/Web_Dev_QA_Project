@@ -11,12 +11,14 @@
 | -----  |
 | Wrote explanation for missed lines in utilty.py and app.py |
 | Removed unneeded lines from utility.py and app.py |
+| Created test_misc_pages.py |
 
 | Sophia |
 | -----  |
 | Wrote explanation for missed lines in database.py |
 | Removed unneeded lines from database.py |
-| Created test_misc_pages.py |
+| Created test_update_list.py |
+
 
 | Aniss |
 | -----  |
