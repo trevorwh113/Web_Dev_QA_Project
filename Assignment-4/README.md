@@ -80,6 +80,10 @@
 
 `test_save_prescription.py`
 
+`test_update_list.py`
+
+`test_misc_pages.py`
+
 ### Functional Tests (related to test cases from A1)
 `test_client_lookup.py`
 
