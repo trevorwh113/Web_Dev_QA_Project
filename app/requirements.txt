@@ -3,3 +3,5 @@ Werkzeug==2.2.2
 Pytest
 Pymongo
 Coverage
+Selenium
+Webdriver-manager
