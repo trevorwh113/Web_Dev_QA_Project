@@ -3,3 +3,4 @@ Werkzeug==2.2.2
 Pytest
 Pymongo
 Coverage
+selenium==4.26.1
