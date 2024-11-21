@@ -3,5 +3,5 @@ Werkzeug==2.2.2
 Pytest
 Pymongo
 Coverage
-Selenium
-Webdriver-manager
+Pytest-Flask==1.2.0
+Pytest-Playwright
