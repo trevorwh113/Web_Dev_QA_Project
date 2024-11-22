@@ -5,7 +5,7 @@ the html button navigation between pages.
 
 from flask import url_for
 from playwright.sync_api import expect
-import re
+import rez
 
 def test_home_and_back_buttons(live_server, page):    
     # Load the home page and make sure it comes up.
