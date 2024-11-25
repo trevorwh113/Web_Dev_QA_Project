@@ -1,8 +1,15 @@
+"""
+This file contains an integration test for the update prescription
+feature, and if its results show up on the client search page.
+"""
 from app import app
 import utility, pytest, json
 
-# Test for adding a removing an active prescription
+# Success cases ---------------------------------------------
 def test_prescription_num_1():
+    """
+    Success case: Test for removing an active prescription.
+    """
     # get client from data base
     client = utility.get_client_by_phone("(444)-656-6565")
     acts = utility.get_active_prescripts(client)
@@ -39,9 +46,8 @@ def test_prescription_num_1():
     #check that number of active prescriptions is in response data
     assert bytes(str(num), 'utf-8') in response3.data, "Did not change prescription number"
     
-    
-# Test for adding a active prescription (from the history list)
 def test_prescription_num_2():
+    """Success case: Test for adding an active prescription (from the history list)."""
     # get client from data base
     client = utility.get_client_by_phone("(444)-656-6565")
     acts = utility.get_active_prescripts(client)

@@ -2,12 +2,16 @@
 This test file implements an integration/end-to-end test for
 the html button navigation between pages.
 """
-
 from flask import url_for
 from playwright.sync_api import expect
-import rez
+import re
 
-def test_home_and_back_buttons(live_server, page):    
+# Success cases ---------------------------------------------
+def test_home_and_back_buttons(live_server, page):
+    """
+    Success Case: Navigates from the home page to all other 
+    accessible implemented pages.
+    """    
     # Load the home page and make sure it comes up.
     page.goto(url_for('home', _external=True))
     expect(page).to_have_title(re.compile("Home"))

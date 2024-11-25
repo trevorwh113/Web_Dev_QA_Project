@@ -7,7 +7,7 @@ import pytest
 import random
 from database import get_database
 
-
+# Success cases ---------------------------------------------
 def test_submit_and_search():
     """
     Success case: Tests that a prescription submission increases the number of
