@@ -55,11 +55,7 @@
     playwright install
     ```
 
-    c. Since this test works only on a unix/linux machine, it does not have the prefix of test_, and this must be specified manually. First navigate to the `/tests`, then run either this command, for all tests:
-     ```bash
-    pytest 
-    ```
-    or this one, for just the navigation one:
+    c. Since this test works only on a unix/linux machine, it does not have the prefix of test_, and thus must be specified manually. First navigate to the `/tests`, then run  this command:
      ```bash
     pytest verify_navigation.py
     ```
