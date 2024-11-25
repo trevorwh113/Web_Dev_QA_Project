@@ -117,6 +117,7 @@ function format_active_item(data) {
         option = document.createElement("option");
         option.value = String(index+1);
         option.text = optionText;
+        option.id = "dd"+index
         col.appendChild(option);
     });
 
