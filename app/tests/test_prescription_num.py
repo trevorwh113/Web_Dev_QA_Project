@@ -1,41 +1,78 @@
 from app import app
 import utility, pytest, json
 
-# to change status and move to old list
-def test_update_prescriptions_3():
-    # client = utility.get_client_by_phone("(444)-656-6565")
-    # acts = utility.get_active_prescripts(client)
-    # olds = utility.get_old_prescripts(client)
+# Test for adding a removing an active prescription
+def test_prescription_num_1():
+    # get client from data base
+    client = utility.get_client_by_phone("(444)-656-6565")
+    acts = utility.get_active_prescripts(client)
+    olds = utility.get_old_prescripts(client)
     
-    # p = acts.pop()
-    # p[4] = "5"
-    # olds.append(p)
+    num = len(acts) # number of active prescriptions
     
-    # response = app.test_client().post('/update_list', json={
-    #     'id': "(444)-656-6565",
-    #     'active': acts, 
-    #     'old': olds
-    # }, )
+    # check that client is actually in client search page
+    response1 = app.test_client().post('/clients', data={"search_par": "(444)-656-6565"})
+    assert bytes(str(num), 'utf-8') in response1.data, "Active prescription number incorrect"
+    assert b"(444)-656-6565" in response1.data, "Did not load a client entry correctly"
+    assert response1.status_code == 200 # ensure data is loaded correctly
     
-    response =  app.test_client().get('/clients')
+    # update perscriptions
+    p = acts.pop()
+    p[4] = "5"
+    olds.append(p)
     
-    print("(444)-656-6565" in response.data)
-
-
-# to change status and move to new list 
-# def test_update_prescriptions_4():
-#     client = utility.get_client_by_phone("(444)-656-6565")
-#     acts = utility.get_active_prescripts(client)
-#     olds = utility.get_old_prescripts(client)
+    num = len(acts) # update number of active prescriptions
     
-#     p = olds.pop()
-#     p[4] = "2"
-#     acts.append(p)
+    # post updated lists to the html/js script that handles it
+    response2 = app.test_client().post('/update_list', json={
+        'id': "(444)-656-6565",
+        'active': acts, 
+        'old': olds
+    }, )
     
-#     utility.update_prescriptions("(444)-656-6565", acts, olds)
+    assert response2.status_code == 200
+            
+    # check that client is STILL in client search page
+    response3 = app.test_client().post('/clients', data={"search_par": "(444)-656-6565"})
+    assert response3.status_code == 200
+    assert b"(444)-656-6565" in response3.data, "Did not load a client entry correctly"
+    #check that number of active prescriptions is in response data
+    assert bytes(str(num), 'utf-8') in response3.data, "Did not change prescription number"
     
-#     acts_after = utility.get_active_prescripts(client)
-#     olds_after = utility.get_old_prescripts(client)
     
-#     assert acts == acts_after
-#     assert olds == olds_after
+# Test for adding a active prescription (from the history list)
+def test_prescription_num_2():
+    # get client from data base
+    client = utility.get_client_by_phone("(444)-656-6565")
+    acts = utility.get_active_prescripts(client)
+    olds = utility.get_old_prescripts(client)
+    
+    num = len(acts) # number of active prescriptions
+    
+    # check that client is actually in client search page
+    response1 = app.test_client().post('/clients', data={"search_par": "(444)-656-6565"})
+    assert b"(444)-656-6565" in response1.data, "Did not load a client entry correctly"
+    assert bytes(str(num), 'utf-8') in response1.data, "Active prescription number incorrect"
+    assert response1.status_code == 200 # ensure data is loaded correctly
+    
+    # update perscriptions
+    p = olds.pop()
+    p[4] = "2"
+    acts.append(p)
+    num = len(acts)
+    
+    # post updated lists to the html/js script that handles it
+    response2 = app.test_client().post('/update_list', json={
+        'id': "(444)-656-6565",
+        'active': acts, 
+        'old': olds
+    }, )
+    
+    assert response2.status_code == 200
+    
+    # check that client is STILL in client search page   
+    response3 = app.test_client().post('/clients', data={"search_par": "(444)-656-6565"})
+    assert response3.status_code == 200
+    assert b"(444)-656-6565" in response3.data, "Did not load a client entry correctly"
+    #check that number of active prescriptions is in response data
+    assert bytes(str(num), 'utf-8') in response3.data, "Did not change prescription number"
