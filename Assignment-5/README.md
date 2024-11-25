@@ -101,7 +101,7 @@
 
 `test_misc_pages.py`
 
-### Functional Tests (related to test cases from A1)
+### Integration Tests
 `test_client_lookup.py`
 
 `test_drug_lookup.py`
@@ -110,7 +110,6 @@
 
 `test_prescription_creation.py`
 
-### Integration Tests (for A5)
 `test_prescription_num.py`
 
 `test_submit_num.py`
