@@ -1,7 +1,7 @@
 """
-This test file implements an integration/end-to-end test for
-the html button navigation between pages. NOTE: Requires the
-app to be concurrently running at the URL (the local host).
+This test file implements an end-to-end test for the html button 
+navigation between pages. NOTE: Requires the app to be concurrently 
+running at the URL (the local host).
 """
 from playwright.sync_api import sync_playwright
 from playwright.sync_api import expect

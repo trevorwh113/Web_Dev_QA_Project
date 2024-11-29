@@ -21,7 +21,7 @@
     <header style="background-color: #79D0E0;">
         <!--Back Button-->
         <button data-testid="back" onclick="window.location.href='/';">
-            <i class="arrow left"></i>
+            <i class="left-arrow"></i>
         </button>
         <!--Title-->
         <h1>Drug Inventory</h1>
@@ -32,6 +32,9 @@
         <!--Drug Name Search Field-->
         <form method="POST">
             <input type="text" name="search_par" placeholder="Drug Name or DIN..." required>
+            <button data-testid="submit" class="submit_button" type="submit">
+                <i class="right-arrow"></i>
+            </button>
         </form>
     </header>
 
