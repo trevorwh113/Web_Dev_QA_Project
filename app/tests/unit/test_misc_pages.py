@@ -1,5 +1,5 @@
 """
-This file contains functional tests for the view of the home page
+This file contains front-end unit tests for the view of the home page
 and two pages which are not included in our selected implemented 
 functionality: the supply order page and the drug information view 
 page. This test was added to ensure code coverage > 90%.
