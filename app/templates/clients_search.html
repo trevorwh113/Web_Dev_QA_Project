@@ -21,7 +21,7 @@
     <header style="background-color: #EA8B96;">
         <!--Back Button-->
         <button data-testid="back" onclick="window.location.href='/';">
-            <i class="arrow left"></i>
+            <i class="left-arrow"></i>
         </button>
         <!--Title-->
         <h1>Client Lookup</h1>
@@ -32,6 +32,9 @@
         <!--Drug Name Search Field-->
         <form method="POST">
             <input type="text" name="search_par" placeholder="Name or Phone Number..." required>
+            <button data-testid="submit" class="submit_button" type="submit">
+                <i class="right-arrow"></i>
+            </button>
         </form>
     </header>
 
