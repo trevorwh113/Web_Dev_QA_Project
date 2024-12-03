@@ -48,7 +48,7 @@
     pytest tests/integration
     pytest tests/end-to-end
     ```
-4. **FOR END-TO-END TESTS:** All tests of this type uses the playwright tool, so you must also install its browsers and have the app running concurrently.
+4. **FOR END-TO-END TESTS:** All tests of this type use the playwright tool, so you must install its browsers and have the app running.
 
     a. Install playwright with this command:    
     ```bash
@@ -60,7 +60,7 @@
     playwright install
     ```
 
-    c. To run tests with PLaywright, we need to first launch `app.py` so that Playwright can simulate user interactions. If not still running, run this command once again:
+    c. Make sure `app.py` is running so that playwright can simulate user interactions. If it is not, run this command once again:
      ```bash
     python app.py
     ```
