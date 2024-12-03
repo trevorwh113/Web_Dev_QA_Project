@@ -42,8 +42,13 @@
      ```bash
     pytest test_name.py
     ```
-   where test_name is the name of the test file.
-4. PERTAINING TO ASSIGNMENT 5: In the case of `verify_navigation.py`, one of our tests uses the playwright tool, so you must also install its browsers.
+   where test_name is the name of the test file. Or use one of the three following commands to target our sub-directories of tests:
+     ```bash
+    pytest tests/unit
+    pytest tests/integration
+    pytest tests/end-to-end
+    ```
+4. **FOR END-TO-END TESTS:** All tests of this type uses the playwright tool, so you must also install its browsers.
 
     a. Install playwright with this command:    
     ```bash
@@ -55,9 +60,19 @@
     playwright install
     ```
 
-    c. Since this test works only on a unix/linux machine, it does not have the prefix of test_, and thus must be specified manually. First navigate to the `/tests`, then run  this command:
+    c. To run tests with PLaywright, we need to first launch `app.py` so that Playwright can simulate user interactions. Run the following command once again:
      ```bash
-    pytest verify_navigation.py
+    python app.py
+    ```
+
+    d. Then, in a new terminal (with an activated virtual machine), run the following command to run just the End-To-End Tests
+     ```bash
+    pytest tests/end-to-end
+    ```
+
+    or, now that app.py is running, you can run all tests together with:
+     ```bash
+    pytest
     ```
 
 ## Generating Code Coverage Reports
@@ -114,7 +129,14 @@
 
 `test_submit_num.py`
 
-`verify_navigation.py`
+### End-To-End Tests
+`test_user_change_status.py`
+
+`test_user_create_prescription.py`
+
+`test_user_drug_client_search.py`
+
+`test_user_navigation.py`
 
 ## Notes
 Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.
