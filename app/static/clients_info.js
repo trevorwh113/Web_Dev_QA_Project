@@ -45,6 +45,7 @@ function show_items() {
 
         // Create the text elements inside the item
         row = format_active_item(client[4][i]);
+        row.setAttribute("data-testid", "A" + i);
         item.appendChild(row);
     
         // Display the item on-screen
@@ -62,6 +63,8 @@ function show_items() {
 
         // Create the text elements inside the item
         row = format_active_item(client[5][i]);
+        row.setAttribute("data-testid", "O" + i);
+
         old_item.appendChild(row);
     
         // Display the item on-screen
@@ -117,13 +120,12 @@ function format_active_item(data) {
         option = document.createElement("option");
         option.value = String(index+1);
         option.text = optionText;
-        option.id = "dd"+index
         col.appendChild(option);
     });
 
     // Selects an option to display automatically based on the status specified in data
     col.value = data[4];
-
+    col.setAttribute("data-testid", "options");
     row.appendChild(col);
     return row;
 }
