@@ -11,7 +11,7 @@
 | -----  |
 | Wrote end-to-end test for user navigation and the search functionality |
 | Wrote associated explanation in the report document |
-| Worked on task distribution file |
+| Wrote all other sections of the report (How to Run Tests and Selected Features) |
 
 | Sophia |
 | -----  |
