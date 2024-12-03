@@ -32,7 +32,7 @@
     ```
 7. Follow the link from the output (or copy-paste into your browser).
 ## Running The Tests 
-1. After following steps for **Running The Project**, terminate the execution of app.py but keep the virtual machine active.
+1. After following steps for **Running The Project**, open a new terminal and repeat the steps, but do not launch the server.
 
 2. Run the following command to run **all** tests:
      ```bash
@@ -48,7 +48,7 @@
     pytest tests/integration
     pytest tests/end-to-end
     ```
-4. **FOR END-TO-END TESTS:** All tests of this type uses the playwright tool, so you must also install its browsers.
+4. **FOR END-TO-END TESTS:** All tests of this type uses the playwright tool, so you must also install its browsers and have the app running concurrently.
 
     a. Install playwright with this command:    
     ```bash
@@ -60,12 +60,12 @@
     playwright install
     ```
 
-    c. To run tests with PLaywright, we need to first launch `app.py` so that Playwright can simulate user interactions. Run the following command once again:
+    c. To run tests with PLaywright, we need to first launch `app.py` so that Playwright can simulate user interactions. If not still running, run this command once again:
      ```bash
     python app.py
     ```
 
-    d. Then, in a new terminal (with an activated virtual machine), run the following command to run just the End-To-End Tests
+    d. Then, in a second terminal (with an activated virtual machine), run the following command to run just the End-To-End Tests
      ```bash
     pytest tests/end-to-end
     ```
@@ -110,7 +110,7 @@
 
 `test_valid_drug.py`
 
-`test_save_prescription.py`
+`test_save_new_prescription.py`
 
 `test_update_list.py`
 
