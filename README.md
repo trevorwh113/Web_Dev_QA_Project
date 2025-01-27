@@ -2,9 +2,10 @@
 
 1. Make sure you are in the root directory of the project (Web_Dev_QA_Project).
 2. In the root directory, create a virtual environment by running the following command:
-    ```bash
-    python3 -m venv venv
-    ```
+    ```python3 -m venv venv```
+
+
+
     Here the second `venv` is the name of the virtual environment. You can use any name you want.
 3. Activate the virtual environment by running the following command:
     ```bash
@@ -43,7 +44,6 @@
     ```
 **NOTE FOR END-TO-END TESTS:** These tests use the Playwright tool and require the app to be running in the
 localhost.
-
     a. Ensure Playwright is installed:    
     ```bash
     pip install -r requirements.txt 
