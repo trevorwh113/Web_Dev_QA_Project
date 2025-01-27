@@ -2,10 +2,9 @@
 
 1. Make sure you are in the root directory of the project (Web_Dev_QA_Project).
 2. In the root directory, create a virtual environment by running the following command:
-    ```python3 -m venv venv```
-
-
-
+    ```bash
+    python3 -m venv venv
+    ```
     Here the second `venv` is the name of the virtual environment. You can use any name you want.
 3. Activate the virtual environment by running the following command:
     ```bash
@@ -42,19 +41,17 @@
     pytest tests/integration
     pytest tests/end-to-end
     ```
-**NOTE FOR END-TO-END TESTS:** These tests use the Playwright tool and require the app to be running in the
+**For End-To-End Tests:** These tests use the Playwright tool and require the app to be running in the
 localhost.
-    a. Ensure Playwright is installed:    
+1. Ensure Playwright is installed:    
     ```bash
     pip install -r requirements.txt 
     ```
-
-    b. Run the following command to complete installation of the browsers:
+2. Run the following command to complete installation of the browsers:
     ```bash
     playwright install
     ```
-
-    c. Make sure `app.py` is running so that Playwright can simulate user interactions. If it is not, run this command once again:
+3. Make sure `app.py` is running so that Playwright can simulate user interactions. If it is not, run this command once again:
      ```bash
     python app.py
     ```
