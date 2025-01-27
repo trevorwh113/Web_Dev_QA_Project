@@ -44,7 +44,7 @@ action was taken to resolve bugs and weaknesses, delivering a high-quality produ
 ## Disclaimers
 Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.
 
-Backend functionality is now implemented and as such, there may be longer load times for the pages as it is fetching that data from the cloud.
+Backend functionality is now implemented and as such, there may be longer load times for the pages as it is fetching that data from the cloud. Also, as a primitive solution to the security risk that is the public repository, the database is set to read-only permissions, so not all features will work correctly.
 
 ## Running The Tests 
 1. Follow the instructions listed in **Running The Project**, but stop before launching the app (steps 1-5).
