@@ -1,3 +1,5 @@
+![An image of the home screen](./Home_Screen.PNG)
+
 ## About the Project
 This software quality assurance project was completed over the course of 12 weeks,
 and entailed designing and developing a web application prototype alongside a 
