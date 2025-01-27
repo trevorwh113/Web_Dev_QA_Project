@@ -1,11 +1,19 @@
-## Disclaimers
-Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.
-
-Backend functionality is now implemented and as such, there may be longer load times for the pages as it is fetching that data from the cloud.
-
+## About the Project
+This software quality assurance project was completed over the course of 12 weeks,
+and entailed designing and developing a web application prototype alongside a 
+full collection of test suites. The task was to create a Medicine Management System;
+based on this criteria, we generated a basic specification from which we selected
+a subset on which to focus. This scope the following:
+1. Administrators shall be able to create a prescription order for a client.
+2. Administrators shall be able to view and update the status of a client’s prescription.
+3. Administrators shall be able to search their inventory for detailed information about a particular drug, namely its identifiers, quantity in stock, dosage instructions, ingredients, and side effects.
+Front-end functionality and database integration was implemented for these three features,
+and a series of unit, integration, and end-to-end tests compiled thereafter to ensure quality.
+Likewise, a code coverage analysis was performed on the implementation. Thanks to all this testing
+effort, appropriate action was taken to resolve bugs and weaknesses, resulting in a high-quality
+deliverable.
 
 ## Running The Project 
-
 1. Make sure you are in the root directory of the project (Web_Dev_QA_Project).
 2. In the root directory, create a virtual environment by running the following command:
     ```bash
@@ -30,6 +38,11 @@ Backend functionality is now implemented and as such, there may be longer load t
     python app.py
     ```
 7. This hosts the webpage in the localhost. Follow the link from the output (or copy-paste into your browser).
+
+## Disclaimers
+Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.
+
+Backend functionality is now implemented and as such, there may be longer load times for the pages as it is fetching that data from the cloud.
 
 ## Running The Tests 
 1. Follow the instructions listed in **Running The Project**, but stop before launching the app (steps 1-5).
@@ -70,6 +83,24 @@ localhost.
     pytest
     ```
 
+## Test Suite Breakdown
+### Unit Tests
+`test_client_by_name.py`    `test_client_filter.py` `test_drug_filter.py`
+
+`test_valid_input.py`   `test_get_set_prescriptions.py` `test_valid_drug.py`
+
+`test_save_new_prescription.py` `test_update_list.py`   `test_misc_pages.py`
+
+### Integration Tests
+`test_client_lookup.py` `test_drug_lookup.py`   `test_view_prescriptions.py`
+
+`test_prescription_creation.py` `test_prescription_num.py`  `test_submit_num.py`
+
+### End-To-End Tests
+`test_user_change_status.py`    `test_user_create_prescription.py`
+
+`test_user_drug_client_search.py`   `test_user_navigation.py`
+
 ## Generating Code Coverage Reports
 1. Make sure to have updated your venv using the requirements.txt file
      ```bash
@@ -90,21 +121,3 @@ localhost.
    and open `./htmlcov/index.html` in your browser.
    
 4. To view the reports that we ran, and that are referenced in `Assignment-4.pdf` open `Assignment-4/initial_coverage/index.hmtl` and `Assignment-4/updated_coverage/index.html` within our github directory.
-
-## Test Suite Breakdown
-### Unit Tests
-`test_client_by_name.py`    `test_client_filter.py` `test_drug_filter.py`
-
-`test_valid_input.py`   `test_get_set_prescriptions.py` `test_valid_drug.py`
-
-`test_save_new_prescription.py` `test_update_list.py`   `test_misc_pages.py`
-
-### Integration Tests
-`test_client_lookup.py` `test_drug_lookup.py`   `test_view_prescriptions.py`
-
-`test_prescription_creation.py` `test_prescription_num.py`  `test_submit_num.py`
-
-### End-To-End Tests
-`test_user_change_status.py`    `test_user_create_prescription.py`
-
-`test_user_drug_client_search.py`   `test_user_navigation.py`
