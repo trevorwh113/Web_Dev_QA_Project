@@ -1,17 +1,17 @@
 ## About the Project
 This software quality assurance project was completed over the course of 12 weeks,
 and entailed designing and developing a web application prototype alongside a 
-full collection of test suites. The task was to create a Medicine Management System;
-based on this criteria, we generated a basic specification from which we selected
-a subset on which to focus. This scope the following:
+full collection of test suites. The task was to create a **Medicine Management System**.
+Based on this criteria, we generated a basic specification from which we selected
+a subset to focus on:
 1. Administrators shall be able to create a prescription order for a client.
 2. Administrators shall be able to view and update the status of a client’s prescription.
 3. Administrators shall be able to search their inventory for detailed information about a particular drug, namely its identifiers, quantity in stock, dosage instructions, ingredients, and side effects.
-Front-end functionality and database integration was implemented for these three features,
-and a series of unit, integration, and end-to-end tests compiled thereafter to ensure quality.
-Likewise, a code coverage analysis was performed on the implementation. Thanks to all this testing
-effort, appropriate action was taken to resolve bugs and weaknesses, resulting in a high-quality
-deliverable.
+
+**Front-end** functionality and **database** integration was implemented for all three features,
+and a series of **unit**, **integration**, and **end-to-end tests** created thereafter.
+Likewise, a **code coverage analysis** was performed. As a result of the testing efforts, 
+action was taken to resolve bugs and weaknesses, delivering a high-quality product.
 
 ## Running The Project 
 1. Make sure you are in the root directory of the project (Web_Dev_QA_Project).
