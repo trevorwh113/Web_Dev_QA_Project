@@ -1,37 +1,32 @@
 ## Running The Project 
 
-1. Make sure you are in the root directory of the project (Group-8-FS).
+1. Make sure you are in the root directory of the project (Web_Dev_QA_Project).
 2. In the root directory, create a virtual environment by running the following command:
-
     ```bash
     python3 -m venv venv
     ```
     Here the second `venv` is the name of the virtual environment. You can use any name you want.
-
 3. Activate the virtual environment by running the following command:
-
     ```bash
     source venv/bin/activate 
     ```
     If you are using Windows, you can activate the virtual environment by running the following command:
-
     ```bash
     venv\Scripts\activate
     ```
-4. Install the required packages by running the following command. This is updated for our project (includes pytest).:
-
+4. Install the required packages for the project by running the following command:
     ```bash
     pip install -r requirements.txt
     ```
-5. Change your directory to Group-8-FS/app using cd.
+5. Change your directory to Web_Dev_QA_Project/app using cd.
 6. Run the following command to start the server:
-
     ```bash
     python app.py
     ```
-7. Follow the link from the output (or copy-paste into your browser).
+7. This hosts the webpage in the localhost. Follow the link from the output (or copy-paste into your browser).
+
 ## Running The Tests 
-1. After following steps for **Running The Project**, open a new terminal and repeat the steps, but do not launch the server.
+1. After following steps for **Running The Project**, either terminate the app or open a new terminal and repeat the steps without launching the server.
 
 2. Run the following command to run **all** tests:
      ```bash
@@ -47,14 +42,14 @@
     pytest tests/integration
     pytest tests/end-to-end
     ```
-4. **FOR END-TO-END TESTS:** All tests of this type use the playwright tool, so you must install its browsers and have the app running.
+4. **FOR END-TO-END TESTS:** All tests of this type use the Playwright tool, so you must install its browsers and have the app running.
 
-    a. Install playwright with this command:    
+    a. Ensure Playwright is installed by running this command:    
     ```bash
     pip install -r requirements.txt 
     ```
 
-    b. Run the following command to complete installation:
+    b. Run the following command to complete installation of the browsers:
     ```bash
     playwright install
     ```
