@@ -26,8 +26,7 @@
 7. This hosts the webpage in the localhost. Follow the link from the output (or copy-paste into your browser).
 
 ## Running The Tests 
-1. After following steps for **Running The Project**, either terminate the app or open a new terminal and repeat the steps without launching the server.
-
+1. Follow the instructions listed in **Running The Project**, but stop before launching the app (steps 1-5).
 2. Run the following command to run **all** tests:
      ```bash
     pytest 
@@ -36,15 +35,16 @@
      ```bash
     pytest test_name.py
     ```
-   where test_name is the name of the test file. Or use one of the three following commands to target our sub-directories of tests:
+   where test_name is the name of the test file. Or, use one of the three following commands to target our sub-directories of tests:
      ```bash
     pytest tests/unit
     pytest tests/integration
     pytest tests/end-to-end
     ```
-4. **FOR END-TO-END TESTS:** All tests of this type use the Playwright tool, so you must install its browsers and have the app running.
+**NOTE FOR END-TO-END TESTS:** These tests use the Playwright tool and require the app to be running in the
+localhost.
 
-    a. Ensure Playwright is installed by running this command:    
+    a. Ensure Playwright is installed:    
     ```bash
     pip install -r requirements.txt 
     ```
@@ -54,16 +54,14 @@
     playwright install
     ```
 
-    c. Make sure `app.py` is running so that playwright can simulate user interactions. If it is not, run this command once again:
+    c. Make sure `app.py` is running so that Playwright can simulate user interactions. If it is not, run this command once again:
      ```bash
     python app.py
     ```
-
-    d. Then, in a second terminal (with an activated virtual machine), run the following command to run just the End-To-End Tests
+    Then, in a second terminal (with an activated venv), execute the following to run just the End-To-End Tests
      ```bash
     pytest tests/end-to-end
     ```
-
     or, now that app.py is running, you can run all tests together with:
      ```bash
     pytest
@@ -90,19 +88,11 @@
    
 4. To view the reports that we ran, and that are referenced in `Assignment-4.pdf` open `Assignment-4/initial_coverage/index.hmtl` and `Assignment-4/updated_coverage/index.html` within our github directory.
 
-## File Suite(s) Breakdown
+## Test Suite Breakdown
 ### Unit Tests
-`test_client_by_name.py`
+`test_client_by_name.py` `test_client_filter.py` `test_drug_filter.py`
 
-`test_client_filter.py`
-
-`test_drug_filter.py`
-
-`test_valid_input.py`
-
-`test_get_set_prescriptions.py`
-
-`test_valid_drug.py`
+`test_valid_input.py` `test_get_set_prescriptions.py` `test_valid_drug.py`
 
 `test_save_new_prescription.py`
 
