@@ -1,3 +1,9 @@
+## Disclaimers
+Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.
+
+Backend functionality is now implemented and as such, there may be longer load times for the pages as it is fetching that data from the cloud.
+
+
 ## Running The Project 
 
 1. Make sure you are in the root directory of the project (Web_Dev_QA_Project).
@@ -87,39 +93,18 @@ localhost.
 
 ## Test Suite Breakdown
 ### Unit Tests
-`test_client_by_name.py` `test_client_filter.py` `test_drug_filter.py`
+`test_client_by_name.py`    `test_client_filter.py` `test_drug_filter.py`
 
-`test_valid_input.py` `test_get_set_prescriptions.py` `test_valid_drug.py`
+`test_valid_input.py`   `test_get_set_prescriptions.py` `test_valid_drug.py`
 
-`test_save_new_prescription.py`
-
-`test_update_list.py`
-
-`test_misc_pages.py`
+`test_save_new_prescription.py` `test_update_list.py`   `test_misc_pages.py`
 
 ### Integration Tests
-`test_client_lookup.py`
+`test_client_lookup.py` `test_drug_lookup.py`   `test_view_prescriptions.py`
 
-`test_drug_lookup.py`
-
-`test_view_prescriptions.py`
-
-`test_prescription_creation.py`
-
-`test_prescription_num.py`
-
-`test_submit_num.py`
+`test_prescription_creation.py` `test_prescription_num.py`  `test_submit_num.py`
 
 ### End-To-End Tests
-`test_user_change_status.py`
+`test_user_change_status.py`    `test_user_create_prescription.py`
 
-`test_user_create_prescription.py`
-
-`test_user_drug_client_search.py`
-
-`test_user_navigation.py`
-
-## Notes
-Some smaller screens have trouble displaying a few of the web pages. If that is happening, please try to zoom out or in, in an attempt to fix the visual issues.
-
-Backend functionality is now implemented and as such, there may be longer load times for the pages as it is fetching that data from the cloud.
+`test_user_drug_client_search.py`   `test_user_navigation.py`
